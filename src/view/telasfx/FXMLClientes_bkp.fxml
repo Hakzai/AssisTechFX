@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="AnchorPaneClientes" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="531.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.view.FXMLClientesController">
+   <children>
+      <Label fx:id="lbClientesTitulo" layoutX="317.0" layoutY="8.0" prefHeight="35.0" prefWidth="134.0" text="Clientes">
+         <font>
+            <Font name="DejaVu Sans Bold" size="28.0" />
+         </font>
+      </Label>
+      <Pane fx:id="PaneClientes" layoutX="14.0" layoutY="49.0" prefHeight="224.0" prefWidth="741.0">
+         <children>
+            <TableView fx:id="tableClientes" prefHeight="224.0" prefWidth="741.0">
+              <columns>
+                <TableColumn fx:id="tableColumnClientesId" prefWidth="75.0" text="ID Cliente" />
+                <TableColumn fx:id="tableColumnClientesNome" prefWidth="75.0" text="Nome" />
+                  <TableColumn fx:id="tableColumnClientesCPF" prefWidth="75.0" text="CPF" />
+                  <TableColumn fx:id="tableColumnClientesEndereço" prefWidth="75.0" text="Endereço" />
+                  <TableColumn fx:id="tableColumnClientesTelefone" prefWidth="75.0" text="Telefone" />
+                  <TableColumn fx:id="tableColumnClientesCelular" prefWidth="75.0" text="Celular" />
+                  <TableColumn fx:id="tableColumnClientesEmail" prefWidth="75.0" text="Email" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+      <GridPane fx:id="gridPaneClientes" hgap="5.0" layoutX="14.0" layoutY="287.0" prefHeight="52.0" prefWidth="741.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="236.0" minWidth="0.0" prefWidth="50.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="566.0" minWidth="10.0" prefWidth="477.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="532.0" minWidth="10.0" prefWidth="33.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="532.0" minWidth="10.0" prefWidth="169.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="70.0" minHeight="2.0" prefHeight="37.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TextField fx:id="txtNome" prefHeight="25.0" prefWidth="374.0" promptText="Digite o nome completo" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets left="9.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label fx:id="lbNome" contentDisplay="CENTER" prefHeight="17.0" prefWidth="43.0" text="Nome:" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="lbCPF" text="CPF:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <TextField fx:id="txtCPF" prefHeight="25.0" prefWidth="166.0" promptText="xxx.yyy.zzz-ww" GridPane.columnIndex="3" />
+         </children>
+      </GridPane>
+      <Label fx:id="lbEndereco" layoutX="14.0" layoutY="351.0" text="Endereço:" />
+      <TextField fx:id="txtEndereco" layoutX="75.0" layoutY="347.0" prefHeight="25.0" prefWidth="680.0" promptText="Digite o Endereço do Cliente" />
+      <Label fx:id="lbTelefone" layoutX="14.0" layoutY="399.0" text="Telefone: " />
+      <TextField fx:id="txtTelefone" layoutX="75.0" layoutY="395.0" prefHeight="25.0" prefWidth="276.0" promptText="Telefone: (xx) xxxxx-xxxx" />
+      <Label fx:id="lbEmail" layoutX="367.0" layoutY="399.0" text="Email:" />
+      <TextField fx:id="txtEmail" layoutX="405.0" layoutY="395.0" prefHeight="25.0" prefWidth="350.0" promptText="Digite o email do cliente" />
+      <Button fx:id="btnApagar" layoutX="564.0" layoutY="441.0" mnemonicParsing="false" text="Apagar" />
+      <Button fx:id="btnEditar" layoutX="500.0" layoutY="441.0" mnemonicParsing="false" text="Editar" />
+      <Button fx:id="btnNovo" layoutX="367.0" layoutY="441.0" mnemonicParsing="false" onAction="#handleBtnNovo" text="Novo" />
+      <Button fx:id="btnCelulares" layoutX="652.0" layoutY="440.0" mnemonicParsing="false" onAction="#handleBtnCelulares" prefHeight="52.0" prefWidth="102.0" text="Celulares" />
+      <Button fx:id="btnSalvar" layoutX="433.0" layoutY="441.0" mnemonicParsing="false" onAction="#handleBtnSalvar" text="Salvar" />
+      <Label fx:id="lbID" layoutX="14.0" layoutY="445.0" text="Código ID:" />
+      <TextField fx:id="txtID" layoutX="75.0" layoutY="441.0" prefHeight="25.0" prefWidth="74.0" promptText="ex: (0001)" />
+   </children>
+</AnchorPane>

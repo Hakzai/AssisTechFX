@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="AnchorPaneFuncionarios" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="531.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.view.FXMLFuncionarioController">
+   <children>
+      <Label fx:id="lbFuncionariosTitulo" layoutX="283.0" layoutY="6.0" text="Funcionários">
+         <font>
+            <Font name="DejaVu Sans Bold" size="28.0" />
+         </font>
+      </Label>
+      <Pane fx:id="PaneFuncionarios" layoutX="14.0" layoutY="49.0" prefHeight="224.0" prefWidth="741.0">
+         <children>
+            <TableView fx:id="tableFuncionarios" onMouseClicked="#tableFuncionariosMouseClicked" prefHeight="224.0" prefWidth="741.0">
+               <columns>
+                  <TableColumn fx:id="tableColumnFuncId" prefWidth="61.0" text="ID Func" />
+                  <TableColumn fx:id="tableColumnFuncNome" prefWidth="89.0" text="Nome" />
+                  <TableColumn fx:id="tableColumnFuncCPF" prefWidth="75.0" text="CPF" />
+                  <TableColumn fx:id="tableColumnFuncEndereco" prefWidth="75.0" text="Endereço" />
+                  <TableColumn fx:id="tableColumnFuncTelefone" prefWidth="75.0" text="Telefone" />
+                  <TableColumn fx:id="tableColumnFuncEmail" prefWidth="75.0" text="Email" />
+                  <TableColumn fx:id="tableColumnFuncEquipamento" prefWidth="93.0" text="Equipamento" />
+                  <TableColumn fx:id="tableColumnFuncDataContratacao" prefWidth="75.0" text="Data Contratação" />
+                  <TableColumn fx:id="tableColumnFuncSalario" prefWidth="75.0" text="Salário" />
+                  <TableColumn fx:id="tableColumnFuncDataDemissao" prefWidth="75.0" text="Data Demissão" />
+               </columns>
+            </TableView>
+         </children>
+      </Pane>
+      <GridPane fx:id="gridPaneFuncionarios" hgap="5.0" layoutX="14.0" layoutY="287.0" prefHeight="52.0" prefWidth="741.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="236.0" minWidth="0.0" prefWidth="50.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="566.0" minWidth="10.0" prefWidth="477.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="532.0" minWidth="10.0" prefWidth="33.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="532.0" minWidth="10.0" prefWidth="169.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="70.0" minHeight="2.0" prefHeight="37.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <TextField fx:id="txtNome" prefHeight="25.0" prefWidth="374.0" promptText="Digite o nome completo" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets left="9.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label fx:id="lbNome" contentDisplay="CENTER" prefHeight="17.0" prefWidth="43.0" text="Nome:" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="lbCPF" text="CPF:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <TextField fx:id="txtCPF" prefHeight="25.0" prefWidth="166.0" promptText="xxx.yyy.zzz-ww" GridPane.columnIndex="3" />
+         </children>
+      </GridPane>
+      <Label fx:id="lbEndereco" layoutX="14.0" layoutY="351.0" text="Endereço:" />
+      <TextField fx:id="txtEndereco" layoutX="75.0" layoutY="347.0" prefHeight="25.0" prefWidth="467.0" promptText="Digite aqui o Endereço" />
+      <Label fx:id="lbTelefone" layoutX="14.0" layoutY="399.0" text="Telefone: " />
+      <TextField fx:id="txtTelefone" layoutX="75.0" layoutY="395.0" prefHeight="25.0" prefWidth="276.0" promptText="(xx) yyyyy-zzzz" />
+      <Label fx:id="lbEmail" layoutX="367.0" layoutY="399.0" text="Email:" />
+      <TextField fx:id="txtEmail" layoutX="405.0" layoutY="395.0" prefHeight="25.0" prefWidth="350.0" promptText="Digite o email do Funcionário" />
+      <Button fx:id="btnApagar" layoutX="667.0" layoutY="461.0" mnemonicParsing="false" onAction="#handleBtnApagar" text="Apagar" />
+      <Button fx:id="btnNovo" layoutX="534.0" layoutY="461.0" mnemonicParsing="false" onAction="#handleBtnNovo" text="Novo" />
+      <Button fx:id="btnEquipamento" layoutX="405.0" layoutY="447.0" mnemonicParsing="false" onAction="#handleBtnEquipamento" prefHeight="52.0" prefWidth="102.0" text="Equipamentos" />
+      <Button fx:id="btnSalvar" layoutX="600.0" layoutY="461.0" mnemonicParsing="false" onAction="#handleBtnSalvar" text="Salvar" />
+      <Label fx:id="lbDemissao" layoutX="14.0" layoutY="447.0" text="Demissão:" />
+      <TextField fx:id="txtDataDemissao" layoutX="75.0" layoutY="442.0" prefHeight="25.0" prefWidth="276.0" promptText="Data da Demissão (dd/mm/yyyy)" />
+      <Label fx:id="lbSalario" layoutX="15.0" layoutY="493.0" text="Salário:" />
+      <TextField fx:id="txtSalario" layoutX="77.0" layoutY="488.0" prefHeight="25.0" prefWidth="276.0" promptText="R$0000.00" />
+      <Label fx:id="lbID" layoutX="587.0" layoutY="351.0" text="Código ID:" />
+      <TextField fx:id="txtID" disable="true" layoutX="653.0" layoutY="347.0" prefHeight="25.0" prefWidth="102.0" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="AnchorPaneMain" prefHeight="531.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.view.FXMLMainController">
+    <children>
+        <Button fx:id="btnClientes" alignment="CENTER" contentDisplay="CENTER" layoutX="61.0" layoutY="324.0" onAction="#handleBtnClientes" prefHeight="40.0" prefWidth="150.0" text="Clientes">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Button fx:id="btnPeças" alignment="CENTER" contentDisplay="CENTER" layoutX="61.0" layoutY="382.0" onAction="#handleBtnPeças" prefHeight="40.0" prefWidth="150.0" text="Peças">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnAluguel" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="61.0" layoutY="439.0" onAction="#handleBtnAluguel" prefHeight="40.0" prefWidth="150.0" text="Aluguel">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnOrdemServico" alignment="CENTER" contentDisplay="CENTER" layoutX="309.0" layoutY="325.0" onAction="#handleBtnOrdemServico" prefHeight="40.0" prefWidth="150.0" text="Ordem de Serviço">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnFornecedores" alignment="CENTER" contentDisplay="CENTER" layoutX="309.0" layoutY="383.0" onAction="#handleBtnFornecedores" prefHeight="40.0" prefWidth="150.0" text="Fornecedores">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnCaixa" alignment="CENTER" contentDisplay="CENTER" layoutX="309.0" layoutY="440.0" onAction="#handleBtnCaixa" prefHeight="40.0" prefWidth="150.0" text="Caixa">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnFuncionarios" alignment="CENTER" contentDisplay="CENTER" layoutX="559.0" layoutY="325.0" onAction="#handleBtnFuncionarios" prefHeight="40.0" prefWidth="150.0" text="Funcionários">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnEquipamento" alignment="CENTER" contentDisplay="CENTER" layoutX="559.0" layoutY="383.0" onAction="#handleBtnEquipamento" prefHeight="40.0" prefWidth="150.0" text="Equipamentos">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnRelatorios" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="559.0" layoutY="439.0" onAction="#handleBtnRelatorios" prefHeight="40.0" prefWidth="150.0" text="Relatórios">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <BorderPane fx:id="borderMainServicos" layoutX="14.0" layoutY="53.0" prefHeight="227.0" prefWidth="742.0">
+         <center>
+            <TableView fx:id="tableMainServicos" prefHeight="205.0" prefWidth="742.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn fx:id="tableColumnMainId" prefWidth="75.0" text="ID Serviço" />
+                  <TableColumn fx:id="tableColumnMainNome" prefWidth="153.0" text="Nome do Cliente" />
+                  <TableColumn fx:id="tableColumnMainTelefone" prefWidth="75.0" text="Telefone" />
+                  <TableColumn fx:id="tableColumnMainDataInicio" prefWidth="77.0" text="Data Início" />
+                <TableColumn fx:id="tableColumnMainDataPlanejada" prefWidth="91.0" text="Data Planejada" visible="false" />
+                  <TableColumn fx:id="tableColumnMainDataFinal" prefWidth="65.0" text="Data Final" />
+                  <TableColumn fx:id="tableColumnMainValorPlanejado" text="Valor Planejado" />
+                  <TableColumn fx:id="tableColumnMainValorFinal" prefWidth="68.0" text="Valor Final" />
+                  <TableColumn fx:id="tableColumnMainStatus" prefWidth="77.0" text="STATUS" />
+              </columns>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </TableView>
+         </center>
+      </BorderPane>
+      <Label fx:id="lbMainTitulo" alignment="CENTER" layoutX="260.0" layoutY="14.0" text="AssisTech Informática">
+         <font>
+            <Font name="DejaVu Sans Bold" size="20.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+    </children>
+</AnchorPane>

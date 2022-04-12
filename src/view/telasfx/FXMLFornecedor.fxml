@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="AnchorPaneFornecedor" prefHeight="454.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.view.FXMLFornecedorController">
+   <children>
+      <Label fx:id="lbFornecedorTitulo" layoutX="285.0" layoutY="14.0" prefHeight="35.0" prefWidth="222.0" text="Fornecedores">
+         <font>
+            <Font name="DejaVu Sans Bold" size="28.0" />
+         </font>
+      </Label>
+      <Pane fx:id="PaneFornecedor" layoutX="24.0" layoutY="59.0" prefHeight="224.0" prefWidth="741.0">
+         <children>
+            <TableView fx:id="tableFornecedor" onMouseClicked="#tableFornecedorMouseClicked" prefHeight="224.0" prefWidth="741.0">
+               <columns>
+                  <TableColumn fx:id="tableColumnFornecedorId" prefWidth="98.0" text="ID Fornecedor" />
+                  <TableColumn fx:id="tableColumnFornecedorNome" prefWidth="237.0" text="Nome" />
+                  <TableColumn fx:id="tableColumnFornecedorCNPJ" prefWidth="130.0" text="CNPJ" />
+                  <TableColumn fx:id="tableColumnFornecedorTelefone" prefWidth="138.0" text="Telefone" />
+                  <TableColumn fx:id="tableColumnDataCompra" prefWidth="136.0" text="Primeira Compra em" />
+               </columns>
+            </TableView>
+         </children>
+      </Pane>
+      <GridPane fx:id="gridPaneFornecedor" hgap="5.0" layoutX="24.0" layoutY="297.0" prefHeight="52.0" prefWidth="741.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="236.0" minWidth="0.0" prefWidth="50.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="566.0" minWidth="10.0" prefWidth="410.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="532.0" minWidth="10.0" prefWidth="37.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="532.0" minWidth="10.0" prefWidth="230.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="70.0" minHeight="2.0" prefHeight="37.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <TextField fx:id="txtNome" prefHeight="25.0" prefWidth="430.0" promptText="Digite o nome completo" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets left="9.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label fx:id="lbNome" contentDisplay="CENTER" prefHeight="17.0" prefWidth="43.0" text="Nome:" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="lbCNPJ" text="CNPJ" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <TextField fx:id="txtCNPJ" prefHeight="25.0" prefWidth="166.0" promptText="nn.mmm.xxx/yyyy-zz" GridPane.columnIndex="3" />
+         </children>
+      </GridPane>
+      <Label fx:id="lbTelefone" layoutX="24.0" layoutY="362.0" text="Telefone: " />
+      <TextField fx:id="txtTelefone" layoutX="85.0" layoutY="358.0" prefHeight="25.0" prefWidth="276.0" promptText="Telefone: (xx) xxxxx-xxxx" />
+      <Label fx:id="lbDataCompra" layoutX="377.0" layoutY="362.0" text="Data Primeira Compra: " />
+      <TextField fx:id="txtDataCompra" layoutX="517.0" layoutY="358.0" prefHeight="25.0" prefWidth="248.0" promptText="Data da realização da 1ª Compra" />
+      <Button fx:id="btnApagar" layoutX="542.0" layoutY="409.0" mnemonicParsing="false" onAction="#handleBtnApagar" text="Apagar" />
+      <Button fx:id="btnNovo" layoutX="393.0" layoutY="409.0" mnemonicParsing="false" onAction="#handleBtnNovo" text="Novo" />
+      <Button fx:id="btnSalvar" layoutX="467.0" layoutY="409.0" mnemonicParsing="false" onAction="#handleBtnSalvar" text="Salvar" />
+      <Label fx:id="lbID" layoutX="156.0" layoutY="413.0" text="Código ID:" />
+      <TextField fx:id="txtID" disable="true" layoutX="227.0" layoutY="409.0" prefHeight="25.0" prefWidth="134.0" />
+   </children>
+</AnchorPane>

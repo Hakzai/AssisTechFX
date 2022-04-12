@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="AnchorPanePecas" prefHeight="425.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.view.FXMLPecasController">
+   <children>
+      <Label fx:id="lbPecasTitulo" alignment="CENTER" contentDisplay="CENTER" layoutX="328.0" layoutY="21.0" prefHeight="35.0" prefWidth="153.0" text="Peças">
+         <font>
+            <Font name="DejaVu Sans Bold" size="28.0" />
+         </font>
+      </Label>
+      <Pane fx:id="PanePecas" layoutX="34.0" layoutY="69.0" prefHeight="224.0" prefWidth="741.0">
+         <children>
+            <TableView fx:id="tablePecas" onMouseClicked="#tableCelularesMouseClicked" prefHeight="224.0" prefWidth="741.0">
+               <columns>
+                  <TableColumn fx:id="tableColumnPecasId" prefWidth="75.0" text="ID Peça" />
+                  <TableColumn fx:id="tableColumnPecasNome" prefWidth="233.0" text="Nome" />
+                  <TableColumn fx:id="tableColumnPecasMarca" prefWidth="173.0" text="Marca" />
+                  <TableColumn fx:id="tableColumnPecasQuantidade" prefWidth="62.0" text="Qtd" />
+                  <TableColumn fx:id="tableColumnPecasFornecedor" prefWidth="197.0" text="ID Fornecedor" />
+               </columns>
+            </TableView>
+         </children>
+      </Pane>
+      <GridPane fx:id="gridPanePecas" hgap="5.0" layoutX="34.0" layoutY="307.0" prefHeight="52.0" prefWidth="741.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="532.0" minWidth="10.0" prefWidth="41.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="532.0" minWidth="10.0" prefWidth="189.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="236.0" minWidth="0.0" prefWidth="57.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="566.0" minWidth="10.0" prefWidth="282.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="532.0" minWidth="10.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="532.0" minWidth="10.0" prefWidth="113.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="70.0" minHeight="2.0" prefHeight="37.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label fx:id="lbNome" alignment="CENTER" text="Nome: " GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <TextField fx:id="txtNome" prefHeight="25.0" prefWidth="178.0" promptText="Digite o Nome da Peça" GridPane.columnIndex="1" />
+            <Label fx:id="lbMarca" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="46.0" text="Marca:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <TextField fx:id="txtMarca" prefHeight="25.0" promptText="Digite a Marca da Peça" GridPane.columnIndex="3">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </TextField>
+            <Label fx:id="lbQuantidade" text="Qtd: " GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <TextField fx:id="txtQuantidade" prefHeight="25.0" prefWidth="121.0" promptText="Quantidade" GridPane.columnIndex="5" />
+         </children>
+      </GridPane>
+      <Label fx:id="lbFornecedor" layoutX="34.0" layoutY="376.0" text="Fornecedor: " />
+      <ComboBox fx:id="cbFornecedor" layoutX="102.0" layoutY="372.0" prefHeight="25.0" prefWidth="260.0" promptText="Fornecedor" />
+      <Button fx:id="btnApagar" layoutX="720.0" layoutY="372.0" mnemonicParsing="false" onAction="#handleBtnApagar" text="Apagar" />
+      <Button fx:id="btnNovo" layoutX="588.0" layoutY="372.0" mnemonicParsing="false" onAction="#handleBtnNovo" text="Novo" />
+      <Button fx:id="btnSalvar" layoutX="654.0" layoutY="372.0" mnemonicParsing="false" onAction="#handleBtnSalvar" text="Salvar" />
+      <Label fx:id="lbID" layoutX="376.0" layoutY="376.0" text="Código ID:" />
+      <TextField fx:id="txtID" disable="true" layoutX="447.0" layoutY="372.0" prefHeight="25.0" prefWidth="121.0" />
+   </children>
+</AnchorPane>

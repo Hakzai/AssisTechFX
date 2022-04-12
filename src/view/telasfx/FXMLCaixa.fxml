@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.view.FXMLCaixaController">
+   <children>
+      <Label fx:id="lbCaixaTitulo" layoutX="335.0" layoutY="14.0" prefHeight="35.0" prefWidth="88.0" text="Caixa">
+         <font>
+            <Font name="DejaVu Sans Bold" size="28.0" />
+         </font>
+      </Label>
+      <Pane fx:id="PaneCaixa" layoutX="24.0" layoutY="59.0" prefHeight="224.0" prefWidth="741.0">
+         <children>
+            <TableView fx:id="tableCaixa" onMouseClicked="#tableCaixaMouseClicked" prefHeight="224.0" prefWidth="741.0">
+               <columns>
+                  <TableColumn fx:id="tableColumnCaixaIdRecibo" prefWidth="78.0" text="Recibo Nro" />
+                  <TableColumn fx:id="tableColumnCaixaTipoServico" prefWidth="317.0" text="Tipo de Serviço" />
+                  <TableColumn fx:id="tableColumnCaixaValorFinal" minWidth="5.0" prefWidth="127.0" text="Valor Final" />
+                  <TableColumn fx:id="tableColumnCaixaFormaPagamento" prefWidth="130.0" text="Forma de Pagamento" />
+                  <TableColumn fx:id="tableColumnCaixaOrdemNumero" prefWidth="87.0" text="Ordem Nro" />
+               </columns>
+            </TableView>
+         </children>
+      </Pane>
+      <GridPane fx:id="gridPaneCaixa" hgap="5.0" layoutX="23.0" layoutY="297.0" prefHeight="52.0" prefWidth="741.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="236.0" minWidth="0.0" prefWidth="88.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="566.0" minWidth="10.0" prefWidth="388.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="532.0" minWidth="10.0" prefWidth="63.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="532.0" minWidth="10.0" prefWidth="187.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="70.0" minHeight="2.0" prefHeight="37.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <TextField fx:id="txtTipoServico" prefHeight="25.0" promptText="Informe qual serviço foi realizado" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </TextField>
+            <Label fx:id="lbTipoServico" contentDisplay="CENTER" prefHeight="17.0" prefWidth="184.0" text="Tipo de Serviço:" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="lbValorFinal" text="Valor Final:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <TextField fx:id="txtValorFinal" prefHeight="25.0" prefWidth="207.0" promptText="Total pago pelo Cliente" GridPane.columnIndex="3" />
+         </children>
+      </GridPane>
+      <Label fx:id="lbOrdemNumero" layoutX="511.0" layoutY="361.0" text="Nro de Ordem:" />
+      <Button fx:id="btnApagar" layoutX="708.0" layoutY="405.0" mnemonicParsing="false" onAction="#handleBtnApagar" text="Apagar" />
+      <Button fx:id="btnNovo" layoutX="572.0" layoutY="405.0" mnemonicParsing="false" onAction="#handleBtnNovo" text="Novo" />
+      <Button fx:id="btnSalvar" layoutX="638.0" layoutY="405.0" mnemonicParsing="false" onAction="#handleBtnSalvar" text="Salvar" />
+      <Label fx:id="lbFormaPagamento" layoutX="24.0" layoutY="361.0" text="Forma de Pagamento:" />
+      <ComboBox fx:id="cbOrdemNumero" layoutX="598.0" layoutY="357.0" prefHeight="25.0" prefWidth="165.0" promptText="Selecione a Ordem" />
+      <ComboBox fx:id="cbFormaPagamento" layoutX="153.0" layoutY="357.0" prefHeight="25.0" prefWidth="350.0" promptText="Escolha a Forma que o Cliente pagou" />
+      <TextField fx:id="txtIdRecibo" disable="true" editable="false" layoutX="89.0" layoutY="405.0" prefHeight="25.0" prefWidth="104.0" />
+      <Label fx:id="lbIdRecibo" contentDisplay="CENTER" layoutX="23.0" layoutY="409.0" prefHeight="17.0" prefWidth="67.0" text="Recibo Nro:" />
+      <Button fx:id="btnRelatorios" disable="true" layoutX="405.0" layoutY="405.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="138.0" text="Relatórios Financeiros" />
+   </children>
+</AnchorPane>
