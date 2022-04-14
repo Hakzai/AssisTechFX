@@ -1,6 +1,9 @@
 package controller.view;
 
 import controller.dao.crud.EquipamentoDAO;
+import controller.dao.crud.FuncionarioDAO;
+import controller.dao.crud.utils.EquipamentoUtils;
+import controller.dao.crud.utils.FuncionarioUtils;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -20,6 +23,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javax.swing.JOptionPane;
 import model.classe.Equipamento;
+import model.classe.Funcionario;
 
 public class FXMLEquipamentoController {
 
@@ -111,10 +115,11 @@ public class FXMLEquipamentoController {
     private Label lbManutencao;
 
     @FXML
-    private ComboBox<Integer> cbFuncionario;
+    private ComboBox<String> cbFuncionario;
 
     @FXML
     private ComboBox<String> cbManutencao;
+    private ObservableList<String> optionsManutencao = FXCollections.observableArrayList("SIM", "NAO"); // popula o combo box
 
     @FXML
     private Label lbID;
@@ -142,8 +147,11 @@ public class FXMLEquipamentoController {
     @FXML
     void handleBtnNovo(ActionEvent event) {
         limpaCampos();
+        cbFuncionario.setDisable(true); // DESABILITA O CB EM CASO DE NOVO EQUIP
     }
 
+    // PRECISA DEBUGAR ESSE MÉTODO PRA VER PORQUE PAROU DE SALVAR
+    
     @FXML
     void handleBtnSalvar(ActionEvent event) {
         // VERIFICA SE HÁ CAMPOS VAZIOS CAMPOS PREENCHIDOS
@@ -181,9 +189,12 @@ public class FXMLEquipamentoController {
 
     @FXML
     void tableEquipamentosMouseClicked(MouseEvent event) {
+        cbFuncionario.setDisable(false); // HABILITANDO O CB PARA EDIÇÃO
+        
         ObservableList<Equipamento> selectEquipamentos = tableEquipamento.getSelectionModel().getSelectedItems();
         
         for(Equipamento equipamento : selectEquipamentos) // RECUPERA OS DADOS DA TABELA NOS FIELDS
+            
             setDataTableObject(equipamento);
     }
 
@@ -223,6 +234,7 @@ public class FXMLEquipamentoController {
 
      // CARREGA A TABELA
      readTable();
+     readComboBox();
  }
  // initialize é como um FORM_POST_OPEN ou LOAD
  // os métodos de ações estarão aqui pra baixo
@@ -231,6 +243,13 @@ public class FXMLEquipamentoController {
  public FXMLEquipamentoController(){
      // NÃO PRECISA DO INIATIALIZE, JÁ É AUTOMATICO
  }
+ 
+  /***
+  * 
+  * 
+  * AQUI É O SEGUINTE, FALTA FAZER O NOME SELECIONADO NO COMBO BOX ASSIGNAR COM O EQUIPAMENTO ESCOLHIDO
+  * PARA STATUS EM USO DO EQUIPAMENTO
+  */
  
  // INSERE OS DADOS DOS CAMPOS NO DAO E DEPOIS NA TABELA
  public Equipamento getDataTableObject(){
@@ -242,12 +261,21 @@ public class FXMLEquipamentoController {
      equipamento.setDataCompra(txtDataCompra.getText());
      equipamento.setDataUltimaManutencao(txtDataUltimaManutencao.getText());
      equipamento.setManutencao(cbManutencao.getPromptText());
-
-     if(!txtID.getText().isEmpty())
+          
+     // O EQUIPAMENTO SÓ PODE SER ASSIGNADO A UM FUNCIONARIO CASO JÁ TENHA SIDO CRIADO
+     // CASO CONTRÁRIO PRECISA PRIMEIRO CRIAR O EQUIP PRA DEPOIS ASSIGNAR A UM FUNCIONARIO
+     if(!txtID.getText().isEmpty()){
          equipamento.setId(Integer.parseInt(txtID.getText()));
-        
+     
+        if(null != cbFuncionario.getValue()){
+            EquipamentoUtils eqDAO = new EquipamentoUtils();
+            eqDAO.setFuncionarioUsingEquipmentByName(cbFuncionario.getValue(), Integer.parseInt(txtID.getText()));
+        }
+     }
+             
      return equipamento;
  }
+ 
  
  // INSERE OS DADOS DA TABELA/OBJETO PARA OS CAMPOS
  public void setDataTableObject(Equipamento equipamento){
@@ -257,17 +285,47 @@ public class FXMLEquipamentoController {
      txtDataCompra.setText(equipamento.getDataCompra());
      txtDataUltimaManutencao.setText(equipamento.getDataUltimaManutencao());
      txtID.setText(Integer.toString(equipamento.getId()));
+     cbManutencao.setPromptText(equipamento.getManutencao());
+     cbManutencao.setValue(equipamento.getManutencao());
+     
+     if(null != String.valueOf(equipamento.getIdFuncionario())){
+        EquipamentoUtils eqDAO = new EquipamentoUtils();
+        cbFuncionario.setPromptText(eqDAO.getFuncionarioNameById(equipamento.getId()));
+        cbFuncionario.setValue(eqDAO.getFuncionarioNameById(equipamento.getId()));
+     }
+     else{
+        cbFuncionario.setPromptText("Este equipamento não está sendo utilizado no Momento");
+        cbFuncionario.setValue(null);
+     }
+     
+           
  }
  
  public void limpaCampos(){
-     txtNome.setText("");
-     txtMarca.setText("");
-     txtPreco.setText("");
-     txtDataCompra.setText("");
-     txtDataUltimaManutencao.setText("");
-     cbManutencao.setPromptText("");
-     cbFuncionario.setPromptText("");
-     txtID.setText("");
+    txtNome.setText("");
+    txtMarca.setText("");
+    txtPreco.setText("");
+    txtDataCompra.setText("");
+    txtDataUltimaManutencao.setText("");
+    txtID.setText("");
+    cbManutencao.setValue(null);
+    cbManutencao.setPromptText("Status");
+    cbFuncionario.setValue(null);
+    cbFuncionario.setPromptText("Que está usando no Momento");
+    
+ }
+ 
+ public void readComboBox(){
+     ObservableList<String> funcionariosOList = FXCollections.observableArrayList();
+        FuncionarioUtils funcDAO = new FuncionarioUtils();
+        
+        for(Funcionario funcionario : funcDAO.listarAtivos()){
+            funcionariosOList.add(funcionario.getNome());
+        }
+        
+     cbFuncionario.setItems(funcionariosOList);
+     
+     cbManutencao.setItems(optionsManutencao);
  }
  
  public void readTable(){
@@ -284,7 +342,8 @@ public class FXMLEquipamentoController {
              equipamento.getPreco(),
              equipamento.getDataCompra(),
              equipamento.getDataUltimaManutencao(),
-             equipamento.getManutencao()
+             equipamento.getManutencao(),
+             equipamento.getIdFuncionario()
          ));
      }
      

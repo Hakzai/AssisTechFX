@@ -20,6 +20,7 @@ public class Equipamento {
     private String dataCompra;
     private String manutencao;
     private String dataUltimaManutencao;
+    private int idFuncionario;
     
     public Equipamento(){
         
@@ -29,7 +30,7 @@ public class Equipamento {
         this.id = id;
     }
     
-    public Equipamento(int id, String nome, String marca, float preco, String dataCompra, String dataUltimaManutencao, String manutencao){
+    public Equipamento(int id, String nome, String marca, float preco, String dataCompra, String dataUltimaManutencao, String manutencao, int idFuncionario){
         this.id = id;
         this.nome = nome;
         this.marca = marca;
@@ -37,6 +38,7 @@ public class Equipamento {
         this.dataCompra = dataCompra;
         this.dataUltimaManutencao = dataUltimaManutencao;
         this.manutencao = manutencao;        
+        this.idFuncionario = idFuncionario;
     }
 
     /**
@@ -135,5 +137,19 @@ public class Equipamento {
      */
     public void setDataUltimaManutencao(String dataUltimaManutencao) {
         this.dataUltimaManutencao = dataUltimaManutencao;
+    }
+
+    /**
+     * @return the idFuncionario
+     */
+    public int getIdFuncionario() {
+        return idFuncionario;
+    }
+
+    /**
+     * @param idFuncionario the idFuncionario to set
+     */
+    public void setIdFuncionario(int idFuncionario) {
+        this.idFuncionario = idFuncionario;
     }
 }

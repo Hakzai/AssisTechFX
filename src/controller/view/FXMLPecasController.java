@@ -144,10 +144,10 @@ public class FXMLPecasController {
             if(pDAO.getDataPrimeiraCompraById(peca.getIdFornecedor()).equals(""))
                 status = pDAO.setDataPrimeiraCompra(peca.getIdFornecedor());
             
-            if(status) // SE A INSERÇÃO DA DATA OCORREU, A GENTE SALVA A PEÇA NO BD
+            if(status){ // SE A INSERÇÃO DA DATA OCORREU, A GENTE SALVA A PEÇA NO BD
                 pDAO.save(peca);
-
-            JOptionPane.showMessageDialog(null, "Peça Salva com Sucesso!");
+                JOptionPane.showMessageDialog(null, "Peça Salva com Sucesso!");
+            }
         }
         
         // ATUALIZA A PEÇA SELECIONADO
@@ -250,7 +250,7 @@ public class FXMLPecasController {
         cbFornecedor.setPromptText(pDAO.getFornecedorNameById(peca.getIdFornecedor()));
         cbFornecedor.setValue(pDAO.getFornecedorNameById(peca.getIdFornecedor()));
         
-        cbFornecedor.setPromptText(Integer.toString(peca.getIdFornecedor()));
+        //cbFornecedor.setPromptText(Integer.toString(peca.getIdFornecedor()));
         
     }
     
