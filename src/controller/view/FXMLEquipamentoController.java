@@ -134,14 +134,19 @@ public class FXMLEquipamentoController {
             JOptionPane.showMessageDialog(null, "Não há Equipamento Selecionado!", "Erro!", 0);
         }
         
-        Equipamento equipamento = new Equipamento(Integer.parseInt(txtID.getText()));
-        
-        EquipamentoDAO eqDAO = new EquipamentoDAO();
-        eqDAO.delete(equipamento);
-        limpaCampos();
-        readTable();
-        
-        JOptionPane.showMessageDialog(null, "O Equipamento foi apagado com sucesso!");
+        else{
+            int input = JOptionPane.showConfirmDialog(null, "Você tem certeza que quer Apagar este Equipamento?", "Apagar Equipamento", 0, 2);
+            if(input == 0){
+                Equipamento equipamento = new Equipamento(Integer.parseInt(txtID.getText()));
+
+                EquipamentoDAO eqDAO = new EquipamentoDAO();
+                eqDAO.delete(equipamento);
+
+                JOptionPane.showMessageDialog(null, "O Equipamento foi apagado com sucesso!");
+                limpaCampos();
+            }
+            readTable();
+        }
     }
 
     @FXML
@@ -156,7 +161,7 @@ public class FXMLEquipamentoController {
     void handleBtnSalvar(ActionEvent event) {
         // VERIFICA SE HÁ CAMPOS VAZIOS CAMPOS PREENCHIDOS
         if(txtNome.getText().isEmpty() || txtMarca.getText().isEmpty() || txtPreco.getText().isEmpty()
-                || txtDataCompra.getText().isEmpty() || txtDataUltimaManutencao.getText().isEmpty() || cbManutencao.getValue().isEmpty()){
+                || txtDataCompra.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Todos os campos precisam estar preenchidos", "Erro!", 0);
             return;
         }
@@ -175,10 +180,17 @@ public class FXMLEquipamentoController {
         // ATUALIZA O EQUIPAMENTO SELECIONADO
         else{
             Equipamento equipamento = new Equipamento();
-            EquipamentoDAO eqDAO = new EquipamentoDAO();
-
             equipamento = getDataTableObject();
-            eqDAO.update(equipamento);
+
+            // SE TEM UMA DATA DE MANUTENÇÃO E O STATUS MANUTENÇÃO NÃO ESTÁ MUDANDO, ENTÃO VAMOS MANTER ELA
+            if(!isManutencaoChangeToYes(equipamento)){
+                EquipamentoDAO eqDAO = new EquipamentoDAO();
+                eqDAO.update(equipamento);
+            }
+            else{ // CASO CONTRÁRIO PEGAREMOS A DATA DE HOJE E SETAREMOS NO CAMPO
+                EquipamentoUtils eqDAO = new EquipamentoUtils();
+                eqDAO.update(equipamento);
+            }
 
             JOptionPane.showMessageDialog(null, "Equipamento Alterado com Sucesso!");
         }
@@ -190,12 +202,16 @@ public class FXMLEquipamentoController {
     @FXML
     void tableEquipamentosMouseClicked(MouseEvent event) {
         cbFuncionario.setDisable(false); // HABILITANDO O CB PARA EDIÇÃO
+        cbManutencao.setDisable(false);
         
         ObservableList<Equipamento> selectEquipamentos = tableEquipamento.getSelectionModel().getSelectedItems();
         
-        for(Equipamento equipamento : selectEquipamentos) // RECUPERA OS DADOS DA TABELA NOS FIELDS
-            
+        for(Equipamento equipamento : selectEquipamentos){ // RECUPERA OS DADOS DA TABELA NOS FIELDS
             setDataTableObject(equipamento);
+            
+            if (null == equipamento.getDataUltimaManutencao())
+                txtDataUltimaManutencao.setText("<Sem Manutenção>");
+        }
     }
 
     @FXML
@@ -259,8 +275,16 @@ public class FXMLEquipamentoController {
      equipamento.setMarca(txtMarca.getText());
      equipamento.setPreco(Float.parseFloat(txtPreco.getText()));
      equipamento.setDataCompra(txtDataCompra.getText());
-     equipamento.setDataUltimaManutencao(txtDataUltimaManutencao.getText());
-     equipamento.setManutencao(cbManutencao.getPromptText());
+     
+     // AQUI SETAMOS O TEXTO QUE APARECE NO FIELD txtDataUltimaManutencao CASO NAO TENHA DATA
+     if(!txtDataUltimaManutencao.getText().equals("<Sem Manutenção>"))
+        equipamento.setDataUltimaManutencao(txtDataUltimaManutencao.getText());
+     
+     // AQUI VERIFICAMOS SE O STATUS ESTÁ DISABLE PARA COLOCAR 'NAO' COMO PADRÃO
+     if(!cbManutencao.isDisabled())
+        equipamento.setManutencao(cbManutencao.getValue());
+     else
+        equipamento.setManutencao("NAO");
           
      // O EQUIPAMENTO SÓ PODE SER ASSIGNADO A UM FUNCIONARIO CASO JÁ TENHA SIDO CRIADO
      // CASO CONTRÁRIO PRECISA PRIMEIRO CRIAR O EQUIP PRA DEPOIS ASSIGNAR A UM FUNCIONARIO
@@ -359,5 +383,17 @@ public class FXMLEquipamentoController {
      // Insere os dados na tabela
      tableEquipamento.setItems(equipamentosOList);
  }
+ 
+    public boolean isManutencaoChangeToYes(Equipamento e){
+        
+        EquipamentoUtils eDAO = new EquipamentoUtils();
+        String manutencaoCompare = eDAO.getManutencaoStatusByEquipmentId(e.getId());
+        
+        // VERIFICAR SE O CAMPO STATUS ESTÁ MUDANDO DE 'NAO' PARA 'SIM'
+        if(!manutencaoCompare.equals(e.getManutencao()) && e.getManutencao().equals("SIM"))
+            return true;
+        
+        return false;
+    }
  
 }

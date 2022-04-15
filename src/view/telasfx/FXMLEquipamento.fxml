@@ -72,10 +72,10 @@
       <Button fx:id="btnNovo" layoutX="602.0" layoutY="415.0" mnemonicParsing="false" onAction="#handleBtnNovo" text="Novo" />
       <Button fx:id="btnSalvar" layoutX="660.0" layoutY="415.0" mnemonicParsing="false" onAction="#handleBtnSalvar" text="Salvar" />
       <Label fx:id="lbDataUltimaManutencao" layoutX="310.0" layoutY="371.0" text="Data Ult Manutenção:" />
-      <TextField fx:id="txtDataUltimaManutencao" layoutX="434.0" layoutY="367.0" prefHeight="25.0" prefWidth="139.0" promptText="xx/yy/zzzz" />
+      <TextField fx:id="txtDataUltimaManutencao" disable="true" layoutX="434.0" layoutY="367.0" prefHeight="25.0" prefWidth="139.0" promptText="xx/yy/zzzz" />
       <Label fx:id="lbManutencao" layoutX="590.0" layoutY="371.0" text="Em Manutenção?" />
       <ComboBox fx:id="cbFuncionario" disable="true" layoutX="106.0" layoutY="415.0" prefHeight="25.0" prefWidth="271.0" promptText="Que está usando no Momento" />
-      <ComboBox fx:id="cbManutencao" layoutX="689.0" layoutY="367.0" prefHeight="25.0" prefWidth="86.0" promptText="Status" />
+      <ComboBox fx:id="cbManutencao" disable="true" layoutX="689.0" layoutY="367.0" prefHeight="25.0" prefWidth="86.0" promptText="Status" />
       <Label fx:id="lbID" layoutX="390.0" layoutY="419.0" text="Código ID:" />
       <TextField fx:id="txtID" disable="true" layoutX="452.0" layoutY="415.0" prefHeight="25.0" prefWidth="121.0" />
    </children>

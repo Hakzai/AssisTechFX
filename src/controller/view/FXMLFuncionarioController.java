@@ -173,7 +173,7 @@ public class FXMLFuncionarioController {
             JOptionPane.showMessageDialog(null, "Não há Funcionario Selecionado!", "Erro!", 0);
         }
         else{
-            int input = JOptionPane.showConfirmDialog(null, "Você tem certeza que quer Demitir este Funcionário?", "Demitir Funcionário", 0, 2);
+            int input = JOptionPane.showConfirmDialog(null, "Você tem certeza que quer Apagar este Funcionário?", "Apagar Funcionário", 0, 2);
             if(input == 0){
                 FuncionarioDAO fDAO = new FuncionarioDAO();
                 fDAO.delete(getFuncionarioSelecionado());

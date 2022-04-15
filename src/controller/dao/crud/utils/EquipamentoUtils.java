@@ -9,6 +9,8 @@ import constants.db.ConstantsEquipamentoSQL;
 import controller.connection.ConnectionFactory;
 import controller.dao.crud.EquipamentoDAO;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -22,6 +24,40 @@ public class EquipamentoUtils extends EquipamentoDAO {
     
     public EquipamentoUtils() {
         super();
+    }
+    
+    public boolean update(Equipamento e){
+        this.getConnection();
+        
+        boolean result = true;
+        
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        
+        String sql = ConstantsEquipamentoSQL.UPDATE;
+        String dateNow = dtf.format(LocalDateTime.now());
+        
+        try{
+            stmt = conn.prepareStatement(sql);
+            
+            stmt.setString(1, e.getNome());
+            stmt.setString(2, e.getMarca());
+            stmt.setDouble(3, e.getPreco());
+            stmt.setString(4, e.getDataCompra());
+            stmt.setString(5, dateNow);
+            stmt.setString(6, e.getManutencao());
+            stmt.setInt(7, e.getId());
+            
+            stmt.executeUpdate();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro DAO Update: " + ex);
+            
+            return result;            
+        } finally {
+            ConnectionFactory.closeConnection(conn, stmt);
+        }
+        
+        return result;
     }
     
     public List<Equipamento> getIdEquipamento(){
@@ -102,6 +138,33 @@ public class EquipamentoUtils extends EquipamentoDAO {
             stmt = null;
         }
         
+    }
+     
+    public String getManutencaoStatusByEquipmentId(int idEquipamento){
+        this.getConnection();
+        
+        String sql = ConstantsEquipamentoSQL.GET_MANUTENCAO_STATUS_BY_EQUIPMENT_ID;
+        String manutencao = "";
+        
+        try{
+            stmt = conn.prepareStatement(sql);
+            
+            stmt.setInt(1, idEquipamento);            
+            
+            rs = stmt.executeQuery();
+            
+            if(null != rs && rs.next()){
+                manutencao = rs.getString("manutencao");
+            }
+            
+        } catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro DAO getManutencaoStatusByEquipmentId: " + ex);
+        } finally{
+            ConnectionFactory.closeConnection(conn, stmt);
+            stmt = null;
+        }
+        
+        return manutencao;
     }
     
     public List<Equipamento> findByName(String name){

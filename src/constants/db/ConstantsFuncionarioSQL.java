@@ -11,7 +11,7 @@ package constants.db;
  */
 public class ConstantsFuncionarioSQL {
     
-    public static String SAVE = "INSERT INTO Funcionario (NOME, CPF, ENDERECO, TELEFONE, EMAIL, SALARIO, DATA_CONTRATACAO, DATA_DEMISSAO) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    public static String SAVE = "INSERT INTO Funcionario (NOME, CPF, ENDERECO, TELEFONE, EMAIL, SALARIO, DATA_CONTRATACAO) VALUES (?, ?, ?, ?, ?, ?, ?)";
     public static String UPDATE = "UPDATE Funcionario SET NOME = ?, CPF = ?, ENDERECO = ?, TELEFONE = ?, EMAIL = ?, SALARIO = ?, DATA_DEMISSAO = ? WHERE ID = ?";
     public static String DELETE = "DELETE FROM Funcionario WHERE ID = ?";
     public static String LISTAR = "SELECT * FROM Funcionario ORDER BY nome";

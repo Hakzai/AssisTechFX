@@ -39,7 +39,6 @@ public class FuncionarioDAO extends ConnectionDAO {
             stmt.setString(5, f.getEmail());
             stmt.setFloat(6, f.getSalario());
             stmt.setString(7, f.getDataContratacao());
-            stmt.setString(8, f.getDataDemissao());
             
             stmt.executeUpdate();
             
