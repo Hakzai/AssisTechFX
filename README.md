@@ -10,4 +10,7 @@ FX Screens created with Gluon Scene Builder 8.5.0
 To run the application it is needed to have MySQL running and configured with NetBeans.
 To create the Schema use 'Assistech my.sql' given with the Project.
 
+If you want, you may download used tools in this link:
+https://drive.google.com/drive/folders/1cmozicDp4qtwnhVbDorNksbL8h4gfqGY?usp=sharing
+
 Isaac.
