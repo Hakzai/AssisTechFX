@@ -106,9 +106,9 @@ public class FXMLCaixaController {
     
     @FXML
     void handleBtnApagar(ActionEvent event) {
-        if(txtIdRecibo.getText().isEmpty()) // VERIFICA SE HÁ CAIXA SELECIONADO
+        if(txtIdRecibo.getText().isEmpty()) // VERIFICA SE Ha CAIXA SELECIONADO
         {
-            JOptionPane.showMessageDialog(null, "Não há Caixa Selecionado!", "Erro!", 0);
+            JOptionPane.showMessageDialog(null, "Nao ha Caixa Selecionado!", "Erro!", 0);
         }
         
         Caixa caixa = new Caixa(Integer.parseInt(txtIdRecibo.getText()));
@@ -124,7 +124,7 @@ public class FXMLCaixaController {
     @FXML
     void handleBtnSalvar(ActionEvent event) {
         
-        // VERIFICA SE HÁ CAMPOS VAZIOS CAMPOS PREENCHIDOS
+        // VERIFICA SE Ha CAMPOS VAZIOS CAMPOS PREENCHIDOS
         if(txtTipoServico.getText().isEmpty() || txtValorFinal.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Todos os campos precisam estar preenchidos", "Erro!", 0);
             return;
@@ -207,12 +207,12 @@ public class FXMLCaixaController {
         readTable();
     }
     
-     // initialize é como um FORM_POST_OPEN ou LOAD
-    // os métodos de ações estarão aqui pra baixo
+     // initialize e como um FORM_POST_OPEN ou LOAD
+    // os metodos de acoes estarao aqui pra baixo
     
     // CONSTRUTOR
     public FXMLCaixaController(){
-        // NÃO PRECISA DO INIATIALIZE, JÁ É AUTOMATICO
+        // NaO PRECISA DO INIATIALIZE, Ja e AUTOMATICO
     }
     
     // INSERE OS DADOS DOS CAMPOS NO DAO E DEPOIS NA TABELA
@@ -257,7 +257,7 @@ public class FXMLCaixaController {
         ObservableList<Caixa> caixaOList = FXCollections.observableArrayList();
         CaixaDAO cxDAO = new CaixaDAO();
         
-        // Busca no banco todas as informações
+        // Busca no banco todas as informacoes
         for(Caixa caixa : cxDAO.listar()){
             caixaOList.add(new Caixa(
                 caixa.getIdRecibo(),

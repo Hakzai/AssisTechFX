@@ -1,6 +1,9 @@
 package controller.view;
 
+import controller.dao.crud.CelularDAO;
 import controller.dao.crud.OrdemServicoDAO;
+import controller.dao.crud.utils.CelularUtils;
+import controller.dao.crud.utils.FuncionarioUtils;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -19,6 +22,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javax.swing.JOptionPane;
+import model.classe.Celular;
+import model.classe.Funcionario;
 import model.classe.OrdemServico;
 
 public class FXMLOrdemServicoController {
@@ -100,10 +105,10 @@ public class FXMLOrdemServicoController {
 
     @FXML
     private ComboBox<String> cbAluguel;
-    private ObservableList<String> aluguel = FXCollections.observableArrayList("Sim", "Não"); // popula o combo box
+    private ObservableList<String> aluguel = FXCollections.observableArrayList("Sim", "Nao"); // popula o combo box
 
     @FXML
-    private ComboBox<Integer> cbAparelho;
+    private ComboBox<String> cbAparelho;
 
     @FXML
     private TextField txtDataSaida;
@@ -119,9 +124,9 @@ public class FXMLOrdemServicoController {
     
     @FXML
     void handleBtnApagar(ActionEvent event) {
-        if(txtNumeroOrdem.getText().isEmpty()) // VERIFICA SE HÁ CLIENTE SELECIONADO
+        if(txtNumeroOrdem.getText().isEmpty()) // VERIFICA SE Ha CLIENTE SELECIONADO
         {
-            JOptionPane.showMessageDialog(null, "Não há OrdemServico Selecionado!", "Erro!", 0);
+            JOptionPane.showMessageDialog(null, "Nao ha OrdemServico Selecionado!", "Erro!", 0);
         }
         
         OrdemServico ordemServico = new OrdemServico(Integer.parseInt(txtNumeroOrdem.getText()));
@@ -141,7 +146,8 @@ public class FXMLOrdemServicoController {
 
     @FXML
     void handleBtnSalvar(ActionEvent event) {
-         // VERIFICA SE HÁ CAMPOS VAZIOS CAMPOS PREENCHIDOS
+         // VERIFICA SE Ha CAMPOS VAZIOS CAMPOS PREENCHIDOS
+         AnchorPaneOrdemServico.getChildren();
         if(cbAluguel.getValue().isEmpty() || txtDataEntrada.getText().isEmpty() || txtOrcamento.getText().isEmpty() || txtDataSaida.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Todos os campos precisam estar preenchidos", "Erro!", 0);
             return;
@@ -183,47 +189,48 @@ public class FXMLOrdemServicoController {
 
     @FXML
     void initialize() {
-        assert AnchorPaneOrdemServico != null : "fx:id=\"AnchorPaneOrdemServico\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert lbOrdemServicoTitulo != null : "fx:id=\"lbOrdemServicoTitulo\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert PaneOrdemServico != null : "fx:id=\"PaneOrdemServico\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert tableOrdemServico != null : "fx:id=\"tableOrdemServico\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert tableColumnOrdemNumero != null : "fx:id=\"tableColumnOrdemNumero\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert tableColumnOrdemAluguel != null : "fx:id=\"tableColumnOrdemAluguel\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert tableColumnOrdemDataEntrada != null : "fx:id=\"tableColumnOrdemDataEntrada\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert tableColumnOrdemAparelho != null : "fx:id=\"tableColumnOrdemAparelho\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert tableColumnOrdemOrcamento != null : "fx:id=\"tableColumnOrdemOrcamento\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert tableColumnOrdemDataSaida != null : "fx:id=\"tableColumnOrdemDataSaida\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert tableColumnOrdemTecnico != null : "fx:id=\"tableColumnOrdemTecnico\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert gridPaneOrdemServico != null : "fx:id=\"gridPaneOrdemServico\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert txtDataEntrada != null : "fx:id=\"txtDataEntrada\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert lbDataEntrada != null : "fx:id=\"lbDataEntrada\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert lbOrcamento != null : "fx:id=\"lbOrcamento\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert txtOrcamento != null : "fx:id=\"txtOrcamento\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert lbTecnico != null : "fx:id=\"lbTecnico\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert btnApagar != null : "fx:id=\"btnApagar\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert btnNovo != null : "fx:id=\"btnNovo\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert btnSalvar != null : "fx:id=\"btnSalvar\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert lbAparelho != null : "fx:id=\"lbAparelho\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert lbAluguel != null : "fx:id=\"lbAluguel\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert cbTecnico != null : "fx:id=\"cbTecnico\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert cbAluguel != null : "fx:id=\"cbAluguel\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert cbAparelho != null : "fx:id=\"cbAparelho\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert txtDataSaida != null : "fx:id=\"txtDataSaida\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert lbDataSaida != null : "fx:id=\"lbDataSaida\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert txtNumeroOrdem != null : "fx:id=\"txtNumeroOrdem\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
-        assert lbNumeroOrdem != null : "fx:id=\"lbOrdemNumero\" was not injected: check your FXML file 'FXMLOrdemServiço.fxml'.";
+        assert AnchorPaneOrdemServico != null : "fx:id=\"AnchorPaneOrdemServico\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert lbOrdemServicoTitulo != null : "fx:id=\"lbOrdemServicoTitulo\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert PaneOrdemServico != null : "fx:id=\"PaneOrdemServico\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert tableOrdemServico != null : "fx:id=\"tableOrdemServico\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert tableColumnOrdemNumero != null : "fx:id=\"tableColumnOrdemNumero\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert tableColumnOrdemAluguel != null : "fx:id=\"tableColumnOrdemAluguel\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert tableColumnOrdemDataEntrada != null : "fx:id=\"tableColumnOrdemDataEntrada\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert tableColumnOrdemAparelho != null : "fx:id=\"tableColumnOrdemAparelho\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert tableColumnOrdemOrcamento != null : "fx:id=\"tableColumnOrdemOrcamento\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert tableColumnOrdemDataSaida != null : "fx:id=\"tableColumnOrdemDataSaida\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert tableColumnOrdemTecnico != null : "fx:id=\"tableColumnOrdemTecnico\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert gridPaneOrdemServico != null : "fx:id=\"gridPaneOrdemServico\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert txtDataEntrada != null : "fx:id=\"txtDataEntrada\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert lbDataEntrada != null : "fx:id=\"lbDataEntrada\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert lbOrcamento != null : "fx:id=\"lbOrcamento\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert txtOrcamento != null : "fx:id=\"txtOrcamento\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert lbTecnico != null : "fx:id=\"lbTecnico\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert btnApagar != null : "fx:id=\"btnApagar\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert btnNovo != null : "fx:id=\"btnNovo\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert btnSalvar != null : "fx:id=\"btnSalvar\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert lbAparelho != null : "fx:id=\"lbAparelho\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert lbAluguel != null : "fx:id=\"lbAluguel\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert cbTecnico != null : "fx:id=\"cbTecnico\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert cbAluguel != null : "fx:id=\"cbAluguel\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert cbAparelho != null : "fx:id=\"cbAparelho\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert txtDataSaida != null : "fx:id=\"txtDataSaida\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert lbDataSaida != null : "fx:id=\"lbDataSaida\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert txtNumeroOrdem != null : "fx:id=\"txtNumeroOrdem\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
+        assert lbNumeroOrdem != null : "fx:id=\"lbOrdemNumero\" was not injected: check your FXML file 'FXMLOrdemServico.fxml'.";
         
         cbAluguel.setItems(aluguel);
         
         // CARREGA A TABELA
         readTable();
+        readComboBoxAparelho();
     }
-    // initialize é como um FORM_POST_OPEN ou LOAD
-    // os métodos de ações estarão aqui pra baixo
+    // initialize e como um FORM_POST_OPEN ou LOAD
+    // os metodos de acoes estarao aqui pra baixo
     
     // CONSTRUTOR
     public FXMLOrdemServicoController(){
-        // NÃO PRECISA DO INIATIALIZE, JÁ É AUTOMATICO
+        // NaO PRECISA DO INIATIALIZE, Ja e AUTOMATICO
     }
     
     // INSERE OS DADOS DOS CAMPOS NO DAO E DEPOIS NA TABELA
@@ -232,7 +239,7 @@ public class FXMLOrdemServicoController {
         
         ordemServico.setAluguel(cbAluguel.getValue());
         ordemServico.setDataEntrada(txtDataEntrada.getText());
-        ordemServico.setIdAparelho(cbAparelho.getValue());
+        //ordemServico.setIdAparelho(cbAparelho.getValue());
         ordemServico.setOrcamento(Float.parseFloat(txtOrcamento.getText()));
         ordemServico.setDataSaida(txtDataSaida.getText());
         ordemServico.setIdTecnico(cbTecnico.getValue());
@@ -247,7 +254,7 @@ public class FXMLOrdemServicoController {
     public void setDataTableObject(OrdemServico ordemServico){
         cbAluguel.setValue(ordemServico.getAluguel());
         txtDataEntrada.setText(ordemServico.getDataEntrada());
-        cbAparelho.setValue(ordemServico.getIdAparelho());
+        //cbAparelho.setValue(ordemServico.getIdAparelho());
         txtOrcamento.setText(Float.toString(ordemServico.getOrcamento()));
         txtDataSaida.setText(ordemServico.getDataSaida());
         cbTecnico.setValue(ordemServico.getIdTecnico());
@@ -261,10 +268,40 @@ public class FXMLOrdemServicoController {
         txtOrcamento.setText("");
         cbAluguel.setPromptText("Selecione o celular");
         cbAluguel.setValue("");
-        cbTecnico.setPromptText("Selecione o responsável pelo serviço");
+        cbTecnico.setPromptText("Selecione o responsavel pelo servico");
         cbTecnico.setValue(0);
         txtDataSaida.setText("");
         txtNumeroOrdem.setText("");
+    }
+    
+    /*public void searchAparelho(){
+        CelularUtils cUtils = new CelularUtils();
+        ObservableList<Integer> idCelularOList = FXCollections.observableArrayList();
+        for(Celular celular : cUtils.getId()){
+            idCelularOList.add(celular.getId());
+        }
+    }
+    
+    public void searchFuncionario(){
+        FuncionarioUtils fUtils = new FuncionarioUtils();
+        ObservableList<Integer> idFuncionarioOList = FXCollections.observableArrayList();
+        for(Funcionario funcionario : fUtils.getId()){
+            idFuncionarioOList.add(funcionario.getId());
+        }
+    }*/
+    
+    public void readComboBoxAparelho(){
+        ObservableList<String> celularesOList = FXCollections.observableArrayList();
+        CelularDAO celDAO = new CelularDAO();
+        
+        for(Celular celular : celDAO.listar())
+            celularesOList.add(celular.getModelo());
+        
+        cbAparelho.setItems(celularesOList);
+    }
+    
+    public void readComboBoxTecnico(){
+        
     }
     
     public void readTable(){
@@ -272,7 +309,7 @@ public class FXMLOrdemServicoController {
         ObservableList<OrdemServico> ordemServicosOList = FXCollections.observableArrayList();
         OrdemServicoDAO osDAO = new OrdemServicoDAO();
         
-        // Busca no banco todas as informações
+        // Busca no banco todas as informacoes
         for(OrdemServico ordemServico : osDAO.listar()){
             ordemServicosOList.add(new OrdemServico(
                 ordemServico.getNumeroOrdem(),

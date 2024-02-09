@@ -7,7 +7,7 @@ package controller.dao.crud;
 
 import constants.db.ConstantsCelularSQL;
 import controller.connection.ConnectionFactory;
-import controller.dao.ConnectionDAO;
+import controller.dao.ConnectionDAOImpl;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import model.classe.Celular;
  *
  * @author Codeiro
  */
-public class CelularDAO extends ConnectionDAO {
+public class CelularDAO extends ConnectionDAOImpl {
     
     public CelularDAO(){
         super();

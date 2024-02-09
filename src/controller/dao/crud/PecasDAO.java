@@ -7,7 +7,7 @@ package controller.dao.crud;
 
 import constants.db.ConstantsPecasSQL;
 import controller.connection.ConnectionFactory;
-import controller.dao.ConnectionDAO;
+import controller.dao.ConnectionDAOImpl;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import model.classe.Pecas;
  *
  * @author Codeiro
  */
-public class PecasDAO extends ConnectionDAO {
+public class PecasDAO extends ConnectionDAOImpl {
     
     public PecasDAO(){
         super();

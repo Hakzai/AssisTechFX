@@ -163,8 +163,7 @@ public class PecasUtils extends PecasDAO {
             
         } catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro DAO setDataPrimeiraCompra: " + ex);
-            sqlResult = false;
-            
+            sqlResult = false;            
         } finally {
             ConnectionFactory.closeConnection(conn, stmt);
             stmt = null;

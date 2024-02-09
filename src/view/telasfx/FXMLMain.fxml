@@ -15,7 +15,7 @@
          <font>
             <Font size="16.0" />
          </font></Button>
-      <Button fx:id="btnPeças" alignment="CENTER" contentDisplay="CENTER" layoutX="61.0" layoutY="382.0" onAction="#handleBtnPeças" prefHeight="40.0" prefWidth="150.0" text="Peças">
+      <Button fx:id="btnPecas" alignment="CENTER" contentDisplay="CENTER" layoutX="61.0" layoutY="382.0" onAction="#handleBtnPecas" prefHeight="40.0" prefWidth="150.0" text="Pecas">
          <font>
             <Font size="16.0" />
          </font>
@@ -25,7 +25,7 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="btnOrdemServico" alignment="CENTER" contentDisplay="CENTER" layoutX="309.0" layoutY="325.0" onAction="#handleBtnOrdemServico" prefHeight="40.0" prefWidth="150.0" text="Ordem de Serviço">
+      <Button fx:id="btnOrdemServico" alignment="CENTER" contentDisplay="CENTER" layoutX="309.0" layoutY="325.0" onAction="#handleBtnOrdemServico" prefHeight="40.0" prefWidth="150.0" text="Ordem de Servico">
          <font>
             <Font size="16.0" />
          </font>
@@ -40,7 +40,7 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="btnFuncionarios" alignment="CENTER" contentDisplay="CENTER" layoutX="559.0" layoutY="325.0" onAction="#handleBtnFuncionarios" prefHeight="40.0" prefWidth="150.0" text="Funcionários">
+      <Button fx:id="btnFuncionarios" alignment="CENTER" contentDisplay="CENTER" layoutX="559.0" layoutY="325.0" onAction="#handleBtnFuncionarios" prefHeight="40.0" prefWidth="150.0" text="Funcionarios">
          <font>
             <Font size="16.0" />
          </font>
@@ -59,7 +59,7 @@
          <center>
             <TableView fx:id="tableMainServicos" prefHeight="205.0" prefWidth="742.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn fx:id="tableColumnMainId" prefWidth="75.0" text="ID Serviço" />
+                <TableColumn fx:id="tableColumnMainId" prefWidth="75.0" text="ID Servico" />
                   <TableColumn fx:id="tableColumnMainNome" prefWidth="153.0" text="Nome do Cliente" />
                   <TableColumn fx:id="tableColumnMainTelefone" prefWidth="75.0" text="Telefone" />
                   <TableColumn fx:id="tableColumnMainDataInicio" prefWidth="77.0" text="Data Início" />
@@ -75,7 +75,7 @@
             </TableView>
          </center>
       </BorderPane>
-      <Label fx:id="lbMainTitulo" alignment="CENTER" layoutX="260.0" layoutY="14.0" text="AssisTech Informática">
+      <Label fx:id="lbMainTitulo" alignment="CENTER" layoutX="260.0" layoutY="14.0" text="AssisTech Informatica">
          <font>
             <Font name="DejaVu Sans Bold" size="20.0" />
          </font>

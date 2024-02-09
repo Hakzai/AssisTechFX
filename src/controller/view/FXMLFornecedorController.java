@@ -22,7 +22,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javax.swing.JOptionPane;
 import model.classe.Fornecedor;
-import model.classe.Funcionario;
 
 public class FXMLFornecedorController {
 
@@ -103,9 +102,9 @@ public class FXMLFornecedorController {
 
     @FXML
     void handleBtnApagar(ActionEvent event) {
-        if(txtID.getText().isEmpty()) // VERIFICA SE HÁ CLIENTE SELECIONADO
+        if(txtID.getText().isEmpty()) // VERIFICA SE Ha CLIENTE SELECIONADO
         {
-            JOptionPane.showMessageDialog(null, "Não há Fornecedor Selecionado!", "Erro!", 0);
+            JOptionPane.showMessageDialog(null, "Nao ha Fornecedor Selecionado!", "Erro!", 0);
         }
         
         Fornecedor fornecedor = new Fornecedor(Integer.parseInt(txtID.getText()));
@@ -125,7 +124,7 @@ public class FXMLFornecedorController {
 
     @FXML
     void handleBtnSalvar(ActionEvent event) {
-        // VERIFICA SE HÁ CAMPOS VAZIOS CAMPOS PREENCHIDOS
+        // VERIFICA SE Ha CAMPOS VAZIOS CAMPOS PREENCHIDOS
         if(txtNome.getText().isEmpty() || txtCNPJ.getText().isEmpty() || txtTelefone.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Todos os campos precisam estar preenchidos", "Erro!", 0);
             return;
@@ -194,12 +193,12 @@ public class FXMLFornecedorController {
         // CARREGA A TABELA
         readTable();
     }
-    // initialize é como um FORM_POST_OPEN ou LOAD
-    // os métodos de ações estarão aqui pra baixo
+    // initialize e como um FORM_POST_OPEN ou LOAD
+    // os metodos de acoes estarao aqui pra baixo
     
     // CONSTRUTOR
     public FXMLFornecedorController(){
-        // NÃO PRECISA DO INIATIALIZE, JÁ É AUTOMATICO
+        // NaO PRECISA DO INIATIALIZE, Ja e AUTOMATICO
     }
     
     // INSERE OS DADOS DOS CAMPOS NO DAO E DEPOIS NA TABELA
@@ -223,8 +222,8 @@ public class FXMLFornecedorController {
         txtDataCompra.setText(fornecedor.getDataPrimeiraCompra());
         txtID.setText(Integer.toString(fornecedor.getId()));
 
-        // APÓS O CLIQUE NA LINHA, A DATA PRIMEIRA COMPRA É DESABILITADA
-        // SOMENTE NA COMPRA DE PEÇAS SERÁ SETADA OU CLICANDO EM NOVO
+        // APÓS O CLIQUE NA LINHA, A DATA PRIMEIRA COMPRA e DESABILITADA
+        // SOMENTE NA COMPRA DE PEcAS SERa SETADA OU CLICANDO EM NOVO
         txtDataCompra.setDisable(true);
 
     }
@@ -243,7 +242,7 @@ public class FXMLFornecedorController {
         ObservableList<Fornecedor> fornecedorOList = FXCollections.observableArrayList();
         FornecedorDAO fDAO = new FornecedorDAO();
         
-        // Busca no banco todas as informações
+        // Busca no banco todas as informacoes
         for(Fornecedor fornecedor : fDAO.listar()){
             fornecedorOList.add(new Fornecedor(
                 fornecedor.getId(),

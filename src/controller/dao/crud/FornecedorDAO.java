@@ -7,7 +7,7 @@ package controller.dao.crud;
 
 import constants.db.ConstantsFornecedorSQL;
 import controller.connection.ConnectionFactory;
-import controller.dao.ConnectionDAO;
+import controller.dao.ConnectionDAOImpl;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import model.classe.Fornecedor;
  *
  * @author Codeiro
  */
-public class FornecedorDAO extends ConnectionDAO {
+public class FornecedorDAO extends ConnectionDAOImpl {
     
     public FornecedorDAO(){
         super();

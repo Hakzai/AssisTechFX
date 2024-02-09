@@ -16,7 +16,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="AnchorPaneOrdemServico" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.view.FXMLOrdemServicoController">
    <children>
-      <Label fx:id="lbOrdemServicoTitulo" layoutX="238.0" layoutY="14.0" prefHeight="35.0" prefWidth="282.0" text="Ordem de Serviço">
+      <Label fx:id="lbOrdemServicoTitulo" layoutX="238.0" layoutY="14.0" prefHeight="35.0" prefWidth="282.0" text="Ordem de Servico">
          <font>
             <Font name="DejaVu Sans Bold" size="28.0" />
          </font>
@@ -26,12 +26,12 @@
             <TableView fx:id="tableOrdemServico" onMouseClicked="#tableOrdemMouseClicked" prefHeight="224.0" prefWidth="741.0">
                <columns>
                   <TableColumn fx:id="tableColumnOrdemNumero" prefWidth="75.0" text="Ordem Nro" />
-                  <TableColumn fx:id="tableColumnOrdemAluguel" prefWidth="83.0" text="É Aluguel?" />
+                  <TableColumn fx:id="tableColumnOrdemAluguel" prefWidth="83.0" text="e Aluguel?" />
                   <TableColumn fx:id="tableColumnOrdemDataEntrada" prefWidth="110.0" text="Data Entrada" />
                   <TableColumn fx:id="tableColumnOrdemAparelho" prefWidth="84.0" text="Aparelho" />
-                  <TableColumn fx:id="tableColumnOrdemOrcamento" prefWidth="81.0" text="Orçamento" />
+                  <TableColumn fx:id="tableColumnOrdemOrcamento" prefWidth="81.0" text="Orcamento" />
                   <TableColumn fx:id="tableColumnOrdemDataSaida" prefWidth="110.0" text="Data Saída" />
-                  <TableColumn fx:id="tableColumnOrdemTecnico" prefWidth="195.0" text="Técnico Responsável" />
+                  <TableColumn fx:id="tableColumnOrdemTecnico" prefWidth="195.0" text="Tecnico Responsavel" />
                </columns>
             </TableView>
          </children>
@@ -57,17 +57,17 @@
                   <Insets />
                </GridPane.margin>
             </Label>
-            <Label fx:id="lbOrcamento" text="Orçamento:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <TextField fx:id="txtOrcamento" prefHeight="25.0" prefWidth="255.0" promptText="Valor orçado p/ Cliente R$0000.00" GridPane.columnIndex="3" />
+            <Label fx:id="lbOrcamento" text="Orcamento:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <TextField fx:id="txtOrcamento" prefHeight="25.0" prefWidth="255.0" promptText="Valor orcado p/ Cliente R$0000.00" GridPane.columnIndex="3" />
          </children>
       </GridPane>
-      <Label fx:id="lbTecnico" layoutX="336.0" layoutY="361.0" text="Técnico:" />
+      <Label fx:id="lbTecnico" layoutX="336.0" layoutY="361.0" text="Tecnico:" />
       <Button fx:id="btnApagar" layoutX="674.0" layoutY="404.0" mnemonicParsing="false" onAction="#handleBtnApagar" text="Apagar" />
       <Button fx:id="btnNovo" layoutX="539.0" layoutY="404.0" mnemonicParsing="false" onAction="#handleBtnNovo" text="Novo" />
       <Button fx:id="btnSalvar" layoutX="605.0" layoutY="404.0" mnemonicParsing="false" onAction="#handleBtnSalvar" text="Salvar" />
       <Label fx:id="lbAparelho" layoutX="31.0" layoutY="361.0" text="Aparelho:" />
-      <Label fx:id="lbAluguel" layoutX="28.0" layoutY="315.0" text="É Aluguel?" />
-      <ComboBox fx:id="cbTecnico" layoutX="386.0" layoutY="357.0" prefHeight="25.0" prefWidth="377.0" promptText="Selecione o responsável pelo serviço" />
+      <Label fx:id="lbAluguel" layoutX="28.0" layoutY="315.0" text="e Aluguel?" />
+      <ComboBox fx:id="cbTecnico" layoutX="386.0" layoutY="357.0" prefHeight="25.0" prefWidth="377.0" promptText="Selecione o responsavel pelo servico" />
       <ComboBox fx:id="cbAluguel" layoutX="92.0" layoutY="311.0" prefHeight="25.0" prefWidth="79.0" />
       <ComboBox fx:id="cbAparelho" layoutX="92.0" layoutY="357.0" prefHeight="25.0" prefWidth="226.0" promptText="Selecione o celular" />
       <TextField fx:id="txtDataSaida" layoutX="91.0" layoutY="404.0" prefHeight="25.0" prefWidth="154.0" promptText="Data (dd/mm/yyyy)" />

@@ -26,7 +26,7 @@
             <TableView fx:id="tableCaixa" onMouseClicked="#tableCaixaMouseClicked" prefHeight="224.0" prefWidth="741.0">
                <columns>
                   <TableColumn fx:id="tableColumnCaixaIdRecibo" prefWidth="78.0" text="Recibo Nro" />
-                  <TableColumn fx:id="tableColumnCaixaTipoServico" prefWidth="317.0" text="Tipo de Serviço" />
+                  <TableColumn fx:id="tableColumnCaixaTipoServico" prefWidth="317.0" text="Tipo de Servico" />
                   <TableColumn fx:id="tableColumnCaixaValorFinal" minWidth="5.0" prefWidth="127.0" text="Valor Final" />
                   <TableColumn fx:id="tableColumnCaixaFormaPagamento" prefWidth="130.0" text="Forma de Pagamento" />
                   <TableColumn fx:id="tableColumnCaixaOrdemNumero" prefWidth="87.0" text="Ordem Nro" />
@@ -45,12 +45,12 @@
             <RowConstraints maxHeight="70.0" minHeight="2.0" prefHeight="37.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <TextField fx:id="txtTipoServico" prefHeight="25.0" promptText="Informe qual serviço foi realizado" GridPane.columnIndex="1">
+            <TextField fx:id="txtTipoServico" prefHeight="25.0" promptText="Informe qual servico foi realizado" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </TextField>
-            <Label fx:id="lbTipoServico" contentDisplay="CENTER" prefHeight="17.0" prefWidth="184.0" text="Tipo de Serviço:" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Label fx:id="lbTipoServico" contentDisplay="CENTER" prefHeight="17.0" prefWidth="184.0" text="Tipo de Servico:" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>

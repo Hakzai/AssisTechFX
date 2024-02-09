@@ -27,7 +27,7 @@
                 <TableColumn fx:id="tableColumnClientesId" prefWidth="75.0" text="ID Cliente" />
                 <TableColumn fx:id="tableColumnClientesNome" prefWidth="75.0" text="Nome" />
                   <TableColumn fx:id="tableColumnClientesCPF" prefWidth="75.0" text="CPF" />
-                  <TableColumn fx:id="tableColumnClientesEndereço" prefWidth="75.0" text="Endereço" />
+                  <TableColumn fx:id="tableColumnClientesEndereco" prefWidth="75.0" text="Endereco" />
                   <TableColumn fx:id="tableColumnClientesTelefone" prefWidth="75.0" text="Telefone" />
                   <TableColumn fx:id="tableColumnClientesEmail" prefWidth="75.0" text="Email" />
               </columns>
@@ -59,8 +59,8 @@
             <TextField fx:id="txtCPF" prefHeight="25.0" prefWidth="166.0" promptText="xxx.yyy.zzz-ww" GridPane.columnIndex="3" />
          </children>
       </GridPane>
-      <Label fx:id="lbEndereco" layoutX="14.0" layoutY="351.0" text="Endereço:" />
-      <TextField fx:id="txtEndereco" layoutX="75.0" layoutY="347.0" prefHeight="25.0" prefWidth="680.0" promptText="Digite o Endereço do Cliente" />
+      <Label fx:id="lbEndereco" layoutX="14.0" layoutY="351.0" text="Endereco:" />
+      <TextField fx:id="txtEndereco" layoutX="75.0" layoutY="347.0" prefHeight="25.0" prefWidth="680.0" promptText="Digite o Endereco do Cliente" />
       <Label fx:id="lbTelefone" layoutX="14.0" layoutY="399.0" text="Telefone: " />
       <TextField fx:id="txtTelefone" layoutX="75.0" layoutY="395.0" prefHeight="25.0" prefWidth="276.0" promptText="Telefone: (xx) xxxxx-xxxx" />
       <Label fx:id="lbEmail" layoutX="367.0" layoutY="399.0" text="Email:" />

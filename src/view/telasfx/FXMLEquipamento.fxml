@@ -28,10 +28,10 @@
                   <TableColumn fx:id="tableColumnEquipamentoId" prefWidth="75.0" text="ID Equip" />
                   <TableColumn fx:id="tableColumnEquipamentoNome" prefWidth="105.0" text="Nome" />
                   <TableColumn fx:id="tableColumnEquipamentoMarca" prefWidth="88.0" text="Marca" />
-                  <TableColumn fx:id="tableColumnEquipamentoPreco" prefWidth="101.0" text="Preço" />
+                  <TableColumn fx:id="tableColumnEquipamentoPreco" prefWidth="101.0" text="Preco" />
                   <TableColumn fx:id="tableColumnDataCompra" prefWidth="125.0" text="Data da Compra" />
-                  <TableColumn fx:id="tableColumnDataManutencao" prefWidth="136.0" text="Data Ult Manutenção" />
-                  <TableColumn fx:id="tableColumnEmManutencao" prefWidth="110.0" text="Em Manutenção" />
+                  <TableColumn fx:id="tableColumnDataManutencao" prefWidth="136.0" text="Data Ult Manutencão" />
+                  <TableColumn fx:id="tableColumnEmManutencao" prefWidth="110.0" text="Em Manutencão" />
                </columns>
             </TableView>
          </children>
@@ -61,21 +61,21 @@
                   <Insets />
                </GridPane.margin>
             </TextField>
-            <Label fx:id="lbPreco" text="Preço" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label fx:id="lbPreco" text="Preco" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <TextField fx:id="txtPreco" prefHeight="25.0" prefWidth="121.0" promptText="da Compra" GridPane.columnIndex="5" />
          </children>
       </GridPane>
       <Label fx:id="lbDataCompra" layoutX="34.0" layoutY="371.0" text="Data da Compra:" />
       <TextField fx:id="txtDataCompra" layoutX="136.0" layoutY="367.0" prefHeight="25.0" prefWidth="157.0" promptText="xx/yy/zzzz" />
-      <Label fx:id="lbFuncionario" layoutX="34.0" layoutY="419.0" text="Funcionário:" />
+      <Label fx:id="lbFuncionario" layoutX="34.0" layoutY="419.0" text="Funcionario:" />
       <Button fx:id="btnApagar" layoutX="720.0" layoutY="415.0" mnemonicParsing="false" onAction="#handleBtnApagar" text="Apagar" />
       <Button fx:id="btnNovo" layoutX="602.0" layoutY="415.0" mnemonicParsing="false" onAction="#handleBtnNovo" text="Novo" />
       <Button fx:id="btnSalvar" layoutX="660.0" layoutY="415.0" mnemonicParsing="false" onAction="#handleBtnSalvar" text="Salvar" />
-      <Label fx:id="lbDataUltimaManutencao" layoutX="310.0" layoutY="371.0" text="Data Ult Manutenção:" />
-      <TextField fx:id="txtDataUltimaManutencao" layoutX="434.0" layoutY="367.0" prefHeight="25.0" prefWidth="139.0" promptText="xx/yy/zzzz" />
-      <Label fx:id="lbManutencao" layoutX="590.0" layoutY="371.0" text="Em Manutenção?" />
-      <ComboBox fx:id="cbFuncionario" layoutX="106.0" layoutY="415.0" prefHeight="25.0" prefWidth="271.0" promptText="Que está usando no Momento" />
-      <ComboBox fx:id="cbManutencao" layoutX="689.0" layoutY="367.0" prefHeight="25.0" prefWidth="86.0" promptText="Status" />
+      <Label fx:id="lbDataUltimaManutencao" layoutX="310.0" layoutY="371.0" text="Data Ult Manutencão:" />
+      <TextField fx:id="txtDataUltimaManutencao" disable="true" layoutX="434.0" layoutY="367.0" prefHeight="25.0" prefWidth="139.0" promptText="xx/yy/zzzz" />
+      <Label fx:id="lbManutencao" layoutX="590.0" layoutY="371.0" text="Em Manutencão?" />
+      <ComboBox fx:id="cbFuncionario" disable="true" layoutX="106.0" layoutY="415.0" prefHeight="25.0" prefWidth="271.0" promptText="Que esta usando no Momento" />
+      <ComboBox fx:id="cbManutencao" disable="true" layoutX="689.0" layoutY="367.0" prefHeight="25.0" prefWidth="86.0" promptText="Status" />
       <Label fx:id="lbID" layoutX="390.0" layoutY="419.0" text="Código ID:" />
       <TextField fx:id="txtID" disable="true" layoutX="452.0" layoutY="415.0" prefHeight="25.0" prefWidth="121.0" />
    </children>

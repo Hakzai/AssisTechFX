@@ -32,7 +32,7 @@ public class Pecas {
         this.idFornecedor = idFornecedor;
     }
     
-    // CONSTRUTOR UTILIZADO NA HORA DE EXCLUIR A PEÇA COM BASE NA TABELA    
+    // CONSTRUTOR UTILIZADO NA HORA DE EXCLUIR A PEcA COM BASE NA TABELA    
     public Pecas (int id){
         this.id = id;        
     }

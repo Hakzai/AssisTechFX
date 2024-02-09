@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.view.FXMLCelularController">
+<AnchorPane id="AnchorPane" fx:id="apanCelulares" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.view.FXMLCelularController">
    <children>
       <Label fx:id="lbCelularesTitulo" layoutX="316.0" layoutY="10.0" prefHeight="35.0" prefWidth="153.0" text="Celulares">
          <font>
@@ -23,7 +23,7 @@
       </Label>
       <Pane fx:id="PaneCelulares" layoutX="24.0" layoutY="59.0" prefHeight="224.0" prefWidth="741.0">
          <children>
-            <TableView fx:id="tableCelulares" onMouseClicked="#tableCelularesMouseClicked" prefHeight="224.0" prefWidth="741.0">
+            <TableView fx:id="tableCelulares" onMouseClicked="#tableMouseClicked" prefHeight="224.0" prefWidth="741.0">
                <columns>
                   <TableColumn fx:id="tableColumnCelularId" prefWidth="75.0" text="ID Celular" />
                   <TableColumn fx:id="tableColumnCelularMarca" prefWidth="75.0" text="Marca" />
@@ -63,7 +63,7 @@
             <Label fx:id="lbMarca" text="Marca:" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <TextField fx:id="txtMarca" prefHeight="25.0" prefWidth="178.0" promptText="Digite a Marca do Celular" GridPane.columnIndex="1" />
             <Label fx:id="lbAno" text="Ano:" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <TextField fx:id="txtAno" prefHeight="25.0" prefWidth="121.0" promptText="Ano de Fabricação" GridPane.columnIndex="5" />
+            <TextField fx:id="txtAno" prefHeight="25.0" prefWidth="121.0" promptText="Ano de Fabricacão" GridPane.columnIndex="5" />
          </children>
       </GridPane>
       <Label fx:id="lbSerial" layoutX="24.0" layoutY="361.0" text="Serial:" />
@@ -73,9 +73,9 @@
       <Button fx:id="btnNovo" layoutX="592.0" layoutY="405.0" mnemonicParsing="false" onAction="#handleBtnNovo" text="Novo" />
       <Button fx:id="btnSalvar" layoutX="650.0" layoutY="405.0" mnemonicParsing="false" onAction="#handleBtnSalvar" text="Salvar" />
       <Label fx:id="lbEstadoUso" layoutX="300.0" layoutY="361.0" text="Estado de Uso:" />
-      <TextField fx:id="txtEstadoUso" layoutX="393.0" layoutY="357.0" prefHeight="25.0" prefWidth="170.0" promptText="Defina estado de conservação" />
+      <TextField fx:id="txtEstadoUso" layoutX="393.0" layoutY="357.0" prefHeight="25.0" prefWidth="170.0" promptText="Defina estado de conservacão" />
       <Label fx:id="lbPropriedade" layoutX="583.0" layoutY="361.0" text="Propriedade:" />
-      <ComboBox fx:id="cbCliente" layoutX="85.0" layoutY="405.0" prefHeight="25.0" prefWidth="282.0" promptText="Proprietário" />
+      <ComboBox fx:id="cbCliente" layoutX="85.0" layoutY="405.0" prefHeight="25.0" prefWidth="282.0" promptText="Proprietario" />
       <ComboBox fx:id="cbPropriedade" layoutX="662.0" layoutY="357.0" prefHeight="25.0" prefWidth="103.0" promptText="Nosso?" />
       <Label fx:id="lbID" layoutX="380.0" layoutY="409.0" text="Código ID:" />
       <TextField fx:id="txtID" disable="true" layoutX="442.0" layoutY="405.0" prefHeight="25.0" prefWidth="121.0" />

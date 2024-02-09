@@ -7,7 +7,7 @@ package controller.dao.crud;
 
 import constants.db.ConstantsCaixaSQL;
 import controller.connection.ConnectionFactory;
-import controller.dao.ConnectionDAO;
+import controller.dao.ConnectionDAOImpl;
 import model.classe.Caixa;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  *
  * @author Codeiro
  */
-public class CaixaDAO extends ConnectionDAO {
+public class CaixaDAO extends ConnectionDAOImpl {
     
     public CaixaDAO(){
         super();

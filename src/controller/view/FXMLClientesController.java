@@ -29,6 +29,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import model.classe.Cliente;
+import controller.model.ServicesDAO;
 
 public class FXMLClientesController {
 
@@ -60,7 +61,7 @@ public class FXMLClientesController {
     private TableColumn<Cliente, String> tableColumnClientesCPF = new TableColumn<>();
 
     @FXML
-    private TableColumn<Cliente, String> tableColumnClientesEndereço = new TableColumn<>();
+    private TableColumn<Cliente, String> tableColumnClientesEndereco = new TableColumn<>();
 
     @FXML
     private TableColumn<Cliente, String> tableColumnClientesTelefone = new TableColumn<>();
@@ -127,7 +128,8 @@ public class FXMLClientesController {
         FXMLCelularController celularController = (FXMLCelularController) loader.getController();
         
         btnCelulares.setDisable(true);
-        
+        Stage clientes = (Stage) btnCelulares.getScene().getWindow(); 
+        clientes.hide(); // ESCONDE A TELA MAIN
         
         Scene scene = new Scene(root);	
         Stage stage = new Stage();
@@ -137,7 +139,8 @@ public class FXMLClientesController {
         stage.showAndWait();
         
         btnCelulares.setDisable(false); // APÓS FECHAR A JANELA MOSTRA A TELA CELULAR NOVAMENTE
-
+        clientes.show();
+        
     }
     
     @FXML
@@ -147,9 +150,9 @@ public class FXMLClientesController {
     
     @FXML
     void handleBtnApagar(ActionEvent event){
-        if(txtID.getText().isEmpty()) // VERIFICA SE HÁ CLIENTE SELECIONADO
+        if(txtID.getText().isEmpty()) // VERIFICA SE Ha CLIENTE SELECIONADO
         {
-            JOptionPane.showMessageDialog(null, "Não há Cliente Selecionado!", "Erro!", 0);
+            JOptionPane.showMessageDialog(null, "Nao ha Cliente Selecionado!", "Erro!", 0);
         }
         
         Cliente cliente = new Cliente(Integer.parseInt(txtID.getText()));
@@ -165,7 +168,7 @@ public class FXMLClientesController {
     @FXML
     void handleBtnSalvar(ActionEvent event){
         
-        // VERIFICA SE HÁ CAMPOS VAZIOS CAMPOS PREENCHIDOS
+        // VERIFICA SE Ha CAMPOS VAZIOS CAMPOS PREENCHIDOS
         if(txtNome.getText().isEmpty() || txtCPF.getText().isEmpty() || txtEndereco.getText().isEmpty()
                 || txtTelefone.getText().isEmpty() || txtEmail.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Todos os campos precisam estar preenchidos", "Erro!", 0);
@@ -215,7 +218,7 @@ public class FXMLClientesController {
         assert tableColumnClientesId != null : "fx:id=\"tableColumnClientesId\" was not injected: check your FXML file 'FXMLClientes.fxml'.";
         assert tableColumnClientesNome != null : "fx:id=\"tableColumnClientesNome\" was not injected: check your FXML file 'FXMLClientes.fxml'.";
         assert tableColumnClientesCPF != null : "fx:id=\"tableColumnClientesCPF\" was not injected: check your FXML file 'FXMLClientes.fxml'.";
-        assert tableColumnClientesEndereço != null : "fx:id=\"tableColumnClientesEndereço\" was not injected: check your FXML file 'FXMLClientes.fxml'.";
+        assert tableColumnClientesEndereco != null : "fx:id=\"tableColumnClientesEndereco\" was not injected: check your FXML file 'FXMLClientes.fxml'.";
         assert tableColumnClientesTelefone != null : "fx:id=\"tableColumnClientesTelefone\" was not injected: check your FXML file 'FXMLClientes.fxml'.";
         assert tableColumnClientesEmail != null : "fx:id=\"tableColumnClientesEmail\" was not injected: check your FXML file 'FXMLClientes.fxml'.";
         assert gridPaneClientes != null : "fx:id=\"gridPaneClientes\" was not injected: check your FXML file 'FXMLClientes.fxml'.";
@@ -240,12 +243,12 @@ public class FXMLClientesController {
         readTable();
         
     }
-    // initialize é como um FORM_POST_OPEN ou LOAD
-    // os métodos de ações estarão aqui pra baixo
+    // initialize e como um FORM_POST_OPEN ou LOAD
+    // os metodos de acoes estarao aqui pra baixo
     
     // CONSTRUTOR
     public FXMLClientesController(){
-        // NÃO PRECISA DO INIATIALIZE, JÁ É AUTOMATICO
+        // NaO PRECISA DO INIATIALIZE, Ja e AUTOMATICO
     }
     
     // INSERE OS DADOS DOS CAMPOS NO DAO E DEPOIS NA TABELA
@@ -288,7 +291,7 @@ public class FXMLClientesController {
         ObservableList<Cliente> clientesOList = FXCollections.observableArrayList();
         ClienteDAO cDAO = new ClienteDAO();
         
-        // Busca no banco todas as informações
+        // Busca no banco todas as informacoes
         for(Cliente cliente : cDAO.listar()){
             clientesOList.add(new Cliente(
                 cliente.getId(),
@@ -304,7 +307,7 @@ public class FXMLClientesController {
         tableColumnClientesId.setCellValueFactory(new PropertyValueFactory<>("id"));
         tableColumnClientesNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tableColumnClientesCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-        tableColumnClientesEndereço.setCellValueFactory(new PropertyValueFactory<>("endereco"));
+        tableColumnClientesEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
         tableColumnClientesTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
         tableColumnClientesEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         

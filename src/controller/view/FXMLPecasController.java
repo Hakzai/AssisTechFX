@@ -105,7 +105,7 @@ public class FXMLPecasController {
     @FXML
     void handleBtnApagar(ActionEvent event) {
         if(txtID.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Não há Peça Selecionado!", "Erro!", 0);
+            JOptionPane.showMessageDialog(null, "Nao ha Peca Selecionado!", "Erro!", 0);
         }
         
         Pecas peca = new Pecas(Integer.parseInt(txtID.getText()));
@@ -115,7 +115,7 @@ public class FXMLPecasController {
         limpaCampos();
         readTable();
         
-        JOptionPane.showMessageDialog(null, "A Peça foi apagado com sucesso!");   
+        JOptionPane.showMessageDialog(null, "A Peca foi apagado com sucesso!");   
     }
 
     @FXML
@@ -125,14 +125,14 @@ public class FXMLPecasController {
 
     @FXML
     void handleBtnSalvar(ActionEvent event) {
-        // VERIFICA SE HÁ CAMPOS VAZIOS CAMPOS PREENCHIDOS
+        // VERIFICA SE Ha CAMPOS VAZIOS CAMPOS PREENCHIDOS
         if(txtNome.getText().isEmpty() || txtMarca.getText().isEmpty() || txtQuantidade.getText().isEmpty()
                 || cbFornecedor.getPromptText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Todos os campos precisam estar preenchidos", "Erro!", 0);
             return;
         }
         
-        // CRIA NOVA PEÇA
+        // CRIA NOVA PEcA
         else if (txtID.getText().isEmpty()){
             Pecas peca = new Pecas();
             PecasUtils pDAO = new PecasUtils();
@@ -140,17 +140,17 @@ public class FXMLPecasController {
             peca = getDataTableObject();
             boolean status = true;
             
-            // AQUI VAMOS SETAR A DATA PRIMEIRA COMPRA NA TABELA FORNECEDOR CASO NÃO TENHA
+            // AQUI VAMOS SETAR A DATA PRIMEIRA COMPRA NA TABELA FORNECEDOR CASO NaO TENHA
             if(pDAO.getDataPrimeiraCompraById(peca.getIdFornecedor()).equals(""))
                 status = pDAO.setDataPrimeiraCompra(peca.getIdFornecedor());
             
-            if(status) // SE A INSERÇÃO DA DATA OCORREU, A GENTE SALVA A PEÇA NO BD
+            if(status){ // SE A INSERcaO DA DATA OCORREU, A GENTE SALVA A PEcA NO BD
                 pDAO.save(peca);
-
-            JOptionPane.showMessageDialog(null, "Peça Salva com Sucesso!");
+                JOptionPane.showMessageDialog(null, "Peca Salva com Sucesso!");
+            }
         }
         
-        // ATUALIZA A PEÇA SELECIONADO
+        // ATUALIZA A PEcA SELECIONADO
         else{
             Pecas peca = new Pecas();
             PecasUtils pDAO = new PecasUtils();
@@ -158,14 +158,14 @@ public class FXMLPecasController {
             peca = getDataTableObject();
             boolean status = true;
             
-            // AQUI VAMOS SETAR A DATA PRIMEIRA COMPRA NA TABELA FORNECEDOR CASO NÃO TENHA
+            // AQUI VAMOS SETAR A DATA PRIMEIRA COMPRA NA TABELA FORNECEDOR CASO NaO TENHA
             if(pDAO.getDataPrimeiraCompraById(peca.getIdFornecedor()).equals(""))
                 status = pDAO.setDataPrimeiraCompra(peca.getIdFornecedor());
             
-            if(status) // SE A INSERÇÃO DA DATA OCORREU, A GENTE SALVA A PEÇA NO BD
+            if(status) // SE A INSERcaO DA DATA OCORREU, A GENTE SALVA A PEcA NO BD
             pDAO.update(peca);
 
-            JOptionPane.showMessageDialog(null, "Peça Alterada com Sucesso!");
+            JOptionPane.showMessageDialog(null, "Peca Alterada com Sucesso!");
         }
         
         limpaCampos(); // LIMPA OS FIELDS TXT
@@ -214,12 +214,12 @@ public class FXMLPecasController {
         readComboBox();
     }
     
-    // initialize é como um FORM_POST_OPEN ou LOAD
-    // os métodos de ações estarão aqui pra baixo
+    // initialize e como um FORM_POST_OPEN ou LOAD
+    // os metodos de acoes estarao aqui pra baixo
     
     // CONSTRUTOR
     public FXMLPecasController(){
-        // NÃO PRECISA DO INIATIALIZE, JÁ É AUTOMATICO
+        // NaO PRECISA DO INIATIALIZE, Ja e AUTOMATICO
     }
     
     // INSERE OS DADOS DOS CAMPOS NO DAO E DEPOIS NA TABELA
@@ -250,7 +250,7 @@ public class FXMLPecasController {
         cbFornecedor.setPromptText(pDAO.getFornecedorNameById(peca.getIdFornecedor()));
         cbFornecedor.setValue(pDAO.getFornecedorNameById(peca.getIdFornecedor()));
         
-        cbFornecedor.setPromptText(Integer.toString(peca.getIdFornecedor()));
+        //cbFornecedor.setPromptText(Integer.toString(peca.getIdFornecedor()));
         
     }
     
@@ -289,7 +289,7 @@ public class FXMLPecasController {
         ObservableList<Pecas> pecasOList = FXCollections.observableArrayList();
         PecasDAO pDAO = new PecasDAO();
         
-        // Busca no banco todas as informações
+        // Busca no banco todas as informacoes
         for(Pecas peca : pDAO.listar()){
             pecasOList.add(new Pecas(
                 peca.getId(),

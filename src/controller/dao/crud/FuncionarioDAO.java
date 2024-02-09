@@ -7,7 +7,7 @@ package controller.dao.crud;
 
 import constants.db.ConstantsFuncionarioSQL;
 import controller.connection.ConnectionFactory;
-import controller.dao.ConnectionDAO;
+import controller.dao.ConnectionDAOImpl;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import model.classe.Funcionario;
  *
  * @author Codeiro
  */
-public class FuncionarioDAO extends ConnectionDAO {
+public class FuncionarioDAO extends ConnectionDAOImpl {
     
     public FuncionarioDAO(){
         super();
@@ -39,7 +39,6 @@ public class FuncionarioDAO extends ConnectionDAO {
             stmt.setString(5, f.getEmail());
             stmt.setFloat(6, f.getSalario());
             stmt.setString(7, f.getDataContratacao());
-            stmt.setString(8, f.getDataDemissao());
             
             stmt.executeUpdate();
             

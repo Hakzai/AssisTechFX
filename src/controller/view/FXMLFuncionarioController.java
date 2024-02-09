@@ -1,6 +1,7 @@
 package controller.view;
 
 import controller.dao.crud.FuncionarioDAO;
+import controller.dao.crud.utils.FuncionarioUtils;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -77,7 +78,7 @@ public class FXMLFuncionarioController {
     @FXML
     private TableColumn<Funcionario, String> tableColumnFuncDataDemissao = new TableColumn<>();
 
-        @FXML
+    @FXML
     private GridPane gridPaneFuncionarios;
 
     @FXML
@@ -112,6 +113,9 @@ public class FXMLFuncionarioController {
 
     @FXML
     private Button btnApagar;
+    
+    @FXML
+    private Button btnDemitir;
 
     @FXML
     private Button btnNovo;
@@ -139,6 +143,9 @@ public class FXMLFuncionarioController {
 
     @FXML
     private TextField txtID;
+    
+    // SETANDO UM FUNCIONARIO EM EVIDENCIA
+    private Funcionario funcionarioSelecionado = null; 
 
     @FXML
     void handleBtnEquipamento(ActionEvent event) throws Exception{
@@ -161,19 +168,39 @@ public class FXMLFuncionarioController {
     
     @FXML
     void handleBtnApagar(ActionEvent event) {
-        if(txtID.getText().isEmpty()) // VERIFICA SE HÁ CLIENTE SELECIONADO
+        if(null == getFuncionarioSelecionado()) // VERIFICA SE Ha CLIENTE SELECIONADO
         {
-            JOptionPane.showMessageDialog(null, "Não há Funcionario Selecionado!", "Erro!", 0);
+            JOptionPane.showMessageDialog(null, "Nao ha Funcionario Selecionado!", "Erro!", 0);
         }
-        
-        Funcionario funcionario = new Funcionario(Integer.parseInt(txtID.getText()));
-        
-        FuncionarioDAO fDAO = new FuncionarioDAO();
-        fDAO.delete(funcionario);
-        limpaCampos();
-        readTable();
-        
-        JOptionPane.showMessageDialog(null, "O Funcionario foi apagado com sucesso!");
+        else{
+            int input = JOptionPane.showConfirmDialog(null, "Você tem certeza que quer Apagar este Funcionario?", "Apagar Funcionario", 0, 2);
+            if(input == 0){
+                FuncionarioDAO fDAO = new FuncionarioDAO();
+                fDAO.delete(getFuncionarioSelecionado());
+                
+                JOptionPane.showMessageDialog(null, "O Funcionario foi apagado com sucesso!");
+                limpaCampos();
+            }
+            readTable();
+        }
+    }
+    
+    @FXML
+    void handleBtnDemitir(ActionEvent event) {
+        if(null == getFuncionarioSelecionado())
+            JOptionPane.showMessageDialog(null, "Selecione um Funcionario Valido", "Erro!", 0);
+       else if(null != funcionarioSelecionado.getDataDemissao())
+            JOptionPane.showMessageDialog(null, "Funcionario ja Demitido!", "Erro!", 0);
+        else{    
+            int input = JOptionPane.showConfirmDialog(null, "Você tem certeza que quer Demitir este Funcionario?", "Demitir Funcionario", 0, 2);
+            if(input == 0){
+                FuncionarioUtils fDAO = new FuncionarioUtils();
+                fDAO.setDataDemissaoByTableSelect(getFuncionarioSelecionado());
+                
+                JOptionPane.showMessageDialog(null, "O Funcionario foi demitido com sucesso!");
+            }
+            readTable();
+        }
     }
 
     @FXML
@@ -183,7 +210,7 @@ public class FXMLFuncionarioController {
 
     @FXML
     void handleBtnSalvar(ActionEvent event) {
-        // VERIFICA SE HÁ CAMPOS VAZIOS CAMPOS PREENCHIDOS
+        // VERIFICA SE Ha CAMPOS VAZIOS CAMPOS PREENCHIDOS
         if(txtNome.getText().isEmpty() || txtCPF.getText().isEmpty() || txtEndereco.getText().isEmpty()
                 || txtTelefone.getText().isEmpty() || txtEmail.getText().isEmpty() || txtSalario.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Todos os campos precisam estar preenchidos", "Erro!", 0);
@@ -219,9 +246,13 @@ public class FXMLFuncionarioController {
     @FXML
     void tableFuncionariosMouseClicked(MouseEvent event) {
         ObservableList<Funcionario> selectFuncionarios = tableFuncionarios.getSelectionModel().getSelectedItems();
-        
-        for(Funcionario funcionario : selectFuncionarios) // RECUPERA OS DADOS DA TABELA NOS FIELDS
+    
+        for(Funcionario funcionario : selectFuncionarios){ // RECUPERA OS DADOS DA TABELA NOS FIELDS
             setDataTableObject(funcionario);
+            setFuncionarioSelecionado(funcionario);
+        }
+        
+        //if(!getFuncionarioSelecionado().getData.)
     }
 
     @FXML
@@ -261,16 +292,17 @@ public class FXMLFuncionarioController {
         assert txtSalario != null : "fx:id=\"txtSalario\" was not injected: check your FXML file 'FXMLFuncionario.fxml'.";
         assert lbID != null : "fx:id=\"lbID\" was not injected: check your FXML file 'FXMLFuncionario.fxml'.";
         assert txtID != null : "fx:id=\"txtID\" was not injected: check your FXML file 'FXMLFuncionario.fxml'.";
+        assert btnDemitir != null : "fx:id=\"btnDemitir\" was not injected: check your FXML file 'FXMLFuncionario.fxml'.";
         
         // CARREGA A TABELA
         readTable();
     }
-    // initialize é como um FORM_POST_OPEN ou LOAD
-    // os métodos de ações estarão aqui pra baixo
+    // initialize e como um FORM_POST_OPEN ou LOAD
+    // os metodos de acoes estarao aqui pra baixo
     
     // CONSTRUTOR
     public FXMLFuncionarioController(){
-        // NÃO PRECISA DO INIATIALIZE, JÁ É AUTOMATICO
+        // NaO PRECISA DO INIATIALIZE, Ja e AUTOMATICO
     }
     
     // INSERE OS DADOS DOS CAMPOS NO DAO E DEPOIS NA TABELA
@@ -288,8 +320,8 @@ public class FXMLFuncionarioController {
         if(!txtID.getText().isEmpty())
             funcionario.setId(Integer.parseInt(txtID.getText()));
         else
-            funcionario.setDataContratacao(getDateTime()); // CHECK SE O FUNCIONARIO É NOVO
-            // POIS AQUI SÓ SETO A DATA NO MOMENTO DA CONTRATAÇÃO
+            funcionario.setDataContratacao(getDateTime()); // CHECK SE O FUNCIONARIO e NOVO
+            // POIS AQUI SÓ SETO A DATA NO MOMENTO DA CONTRATAcaO
         
         return funcionario;
     }
@@ -318,6 +350,8 @@ public class FXMLFuncionarioController {
         txtSalario.setText("");
         txtDataDemissao.setText("");
         txtID.setText("");
+        
+        setFuncionarioSelecionado(null);
     }
     
     public void readTable(){
@@ -325,7 +359,7 @@ public class FXMLFuncionarioController {
         ObservableList<Funcionario> funcionariosOList = FXCollections.observableArrayList();
         FuncionarioDAO fDAO = new FuncionarioDAO();
         
-        // Busca no banco todas as informações
+        // Busca no banco todas as informacoes
         for(Funcionario funcionario : fDAO.listar()){
             funcionariosOList.add(new Funcionario(
                 funcionario.getId(),
@@ -359,6 +393,20 @@ public class FXMLFuncionarioController {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         return dateFormat.format(date);
+    }
+
+    /**
+     * @return the funcionarioSelecionado
+     */
+    public Funcionario getFuncionarioSelecionado() {
+        return funcionarioSelecionado;
+    }
+
+    /**
+     * @param funcionarioSelecionado the funcionarioSelecionado to set
+     */
+    public void setFuncionarioSelecionado(Funcionario funcionarioSelecionado) {
+        this.funcionarioSelecionado = funcionarioSelecionado;
     }
     
 }

@@ -42,8 +42,8 @@ public class FXMLMainController {
     @FXML // fx:id="btnClientes"
     private Button btnClientes; // Value injected by FXMLLoader
 
-    @FXML // fx:id="btnPeças"
-    private Button btnPeças; // Value injected by FXMLLoader
+    @FXML // fx:id="btnPecas"
+    private Button btnPecas; // Value injected by FXMLLoader
 
     @FXML // fx:id="btnAluguel"
     private Button btnAluguel; // Value injected by FXMLLoader
@@ -162,6 +162,7 @@ public class FXMLMainController {
         stage.setScene(scene);
         stage.showAndWait();
         
+        main.wait();
         main.show(); // APÓS FECHAR A JANELA MOSTRA A TELA MAIN NOVAMENTE
 
     }
@@ -242,7 +243,7 @@ public class FXMLMainController {
         
         Scene scene = new Scene(root);	
         Stage stage = new Stage();
-        stage.setTitle("Tela de Ordem de Serviço");
+        stage.setTitle("Tela de Ordem de Servico");
         stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(scene);
         stage.showAndWait();
@@ -251,8 +252,8 @@ public class FXMLMainController {
     }
 
     @FXML
-    void handleBtnPeças(ActionEvent event) throws Exception{
-        System.out.println("Teste btnPeças");
+    void handleBtnPecas(ActionEvent event) throws Exception{
+        System.out.println("Teste btnPecas");
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/telasfx/FXMLPecas.fxml"));
         Pane root = loader.load();
@@ -263,7 +264,7 @@ public class FXMLMainController {
         
         Scene scene = new Scene(root);	
         Stage stage = new Stage();
-        stage.setTitle("Tela Peças");
+        stage.setTitle("Tela Pecas");
         stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(scene);
         stage.showAndWait();
@@ -297,7 +298,7 @@ public class FXMLMainController {
     void initialize() {
         assert AnchorPaneMain != null : "fx:id=\"AnchorPaneMain\" was not injected: check your FXML file 'FXMLMain.fxml'.";
         assert btnClientes != null : "fx:id=\"btnClientes\" was not injected: check your FXML file 'FXMLMain.fxml'.";
-        assert btnPeças != null : "fx:id=\"btnPecas\" was not injected: check your FXML file 'FXMLMain.fxml'.";
+        assert btnPecas != null : "fx:id=\"btnPecas\" was not injected: check your FXML file 'FXMLMain.fxml'.";
         assert btnAluguel != null : "fx:id=\"btnAluguel\" was not injected: check your FXML file 'FXMLMain.fxml'.";
         assert btnOrdemServico != null : "fx:id=\"btnOrdem\" was not injected: check your FXML file 'FXMLMain.fxml'.";
         assert btnFornecedores != null : "fx:id=\"btnFornecedores\" was not injected: check your FXML file 'FXMLMain.fxml'.";
@@ -318,9 +319,9 @@ public class FXMLMainController {
         assert tableColumnMainStatus != null : "fx:id=\"tableColumnMainStatus\" was not injected: check your FXML file 'FXMLMain.fxml'.";
         assert lbMainTitulo != null : "fx:id=\"lbMainTitulo\" was not injected: check your FXML file 'FXMLMain.fxml'.";
         
-        /* // desabilitando os botões sem tela e coluna sem valor
+        /* // desabilitando os botoes sem tela e coluna sem valor
         btnRelatorios.setDisable(true);
-        btnPeças.setDisable(true);
+        btnPecas.setDisable(true);
         btnFornecedores.setDisable(true);
         btnEquipamento.setDisable(true);
         btnAluguel.setDisable(true);
@@ -338,7 +339,7 @@ public class FXMLMainController {
         ObservableList<Main> mainOList = FXCollections.observableArrayList();
         MainDAO cDAO = new MainDAO();
         
-        // Busca no banco todas as informações
+        // Busca no banco todas as informacoes
         for(Main main : cDAO.listar()){
             mainOList.add(new Main(
                 main.getIdServico(),

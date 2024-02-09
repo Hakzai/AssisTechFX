@@ -9,6 +9,8 @@ import constants.db.ConstantsFuncionarioSQL;
 import controller.connection.ConnectionFactory;
 import controller.dao.crud.FuncionarioDAO;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -51,6 +53,65 @@ public class FuncionarioUtils extends FuncionarioDAO {
         
         return idsList;
         
+    }
+    
+    public void setDataDemissaoByTableSelect(Funcionario f){
+        this.getConnection();
+        
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        
+        String sql = ConstantsFuncionarioSQL.SET_DATA_DEMISSAO;
+        String dateNow = dtf.format(LocalDateTime.now());
+        
+        try{
+            stmt = conn.prepareStatement(sql);
+            
+            stmt.setString(1, dateNow);
+            stmt.setInt(2, f.getId());
+            
+            stmt.executeUpdate();            
+            
+        } catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro DAO setDataDemissaoByTableSelect: " + ex);
+        } finally{
+            ConnectionFactory.closeConnection(conn, stmt);
+            stmt = null;
+        }
+    }
+    
+    public List<Funcionario> listarAtivos(){
+        this.getConnection();
+        
+        String sql = ConstantsFuncionarioSQL.LISTAR_FUNCIONARIOS_ATIVOS;
+        
+        List<Funcionario> funcionarioList = new ArrayList<>();
+        
+        try{
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            
+            while (rs.next()){
+                Funcionario funcionario = new Funcionario();
+                
+                funcionario.setId(rs.getInt("ID"));
+                funcionario.setNome(rs.getString("NOME"));
+                funcionario.setCpf(rs.getString("CPF"));
+                funcionario.setEndereco(rs.getString("ENDERECO"));
+                funcionario.setTelefone(rs.getString("TELEFONE"));
+                funcionario.setEmail(rs.getString("EMAIL"));
+                funcionario.setSalario(rs.getFloat("SALARIO"));
+                funcionario.setDataContratacao(rs.getString("DATA_CONTRATACAO"));
+                funcionario.setDataDemissao(rs.getString("DATA_DEMISSAO"));
+                
+                funcionarioList.add(funcionario);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro DAO Listar: " + ex);
+        } finally {
+            ConnectionFactory.closeConnection(conn, stmt, rs);
+        }
+        
+        return funcionarioList;
     }
     
     public List<Funcionario> findByName(String name){

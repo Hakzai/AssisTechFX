@@ -17,7 +17,8 @@ public class Celular {
     private String ano;
     private String serial;
     private String estadoUso;
-    private String isPropriedade; // esse atributo determina se o celular é da assistencia ou nao
+    private String isPropriedade; // esse atributo determina se o celular e da assistencia ou nao
+    private boolean importado;
     private int idCliente;
     
     public Celular(){

@@ -1,13 +1,20 @@
 package controller.view;
 
+import constants.db.ConstantsCelularSQL;
+import controller.FXMLControllerBase;
 import controller.dao.crud.CelularDAO;
 import controller.dao.crud.ClienteDAO;
 import controller.dao.crud.utils.CelularUtils;
 import controller.dao.crud.utils.ClienteUtils;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,13 +27,20 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javax.swing.JOptionPane;
 import model.classe.Celular;
+import model.classe.CelularNew;
 import model.classe.Cliente;
 
-public class FXMLCelularController {
+public class FXMLCelularController extends FXMLControllerBase{
+    
+    Logger LOG = Logger.getLogger(FXMLCelularController.class.getName());
+    
+    @FXML
+    private AnchorPane apanCelulares;
 
     @FXML
     private ResourceBundle resources;
@@ -41,7 +55,7 @@ public class FXMLCelularController {
     private Pane PaneCelulares;
 
     @FXML
-    private TableView<Celular> tableCelulares;
+    private TableView<CelularNew> tableCelulares;
 
     @FXML
     private TableColumn<Celular, Integer> tableColumnCelularId = new TableColumn<>();
@@ -128,73 +142,74 @@ public class FXMLCelularController {
     private TextField txtID;
 
     @FXML
-    void handleBtnApagar(ActionEvent event) {
-        if(txtID.getText().isEmpty()) // VERIFICA SE HÁ CLIENTE SELECIONADO
+    protected void handleBtnNovo(ActionEvent event)
+    {
+        UTILS.clearTextFields(apanCelulares.getChildren());
+    }
+
+    @FXML
+    protected void handleBtnSalvar(ActionEvent event)
+    {
+        if(UTILS.isTextFieldsEmpty(apanCelulares.getChildren()))
         {
-            JOptionPane.showMessageDialog(null, "Não há Celular Selecionado!", "Erro!", 0);
-        }
-        
-        Celular celular = new Celular(Integer.parseInt(txtID.getText()));
-        
-        CelularDAO cDAO = new CelularDAO();
-        cDAO.delete(celular);
-        limpaCampos();
-        readTable();
-        
-        JOptionPane.showMessageDialog(null, "O Cliente foi apagado com sucesso!");
-    }
-
-    @FXML
-    void handleBtnNovo(ActionEvent event) {
-        limpaCampos();
-    }
-
-    @FXML
-    void handleBtnSalvar(ActionEvent event) {
-        
-        // VERIFICA SE HÁ CAMPOS VAZIOS CAMPOS PREENCHIDOS
-        if(txtModelo.getText().isEmpty() || txtMarca.getText().isEmpty() || txtAno.getText().isEmpty()
-                || txtSerial.getText().isEmpty() || txtEstadoUso.getText().isEmpty() || cbPropriedade.getValue().isEmpty()){
             JOptionPane.showMessageDialog(null, "Todos os campos precisam estar preenchidos", "Erro!", 0);
             return;
         }
-        
-        // CRIA NOVO CELULAR
-        else if (txtID.getText().isEmpty()){
-            Celular celular = new Celular();
-            CelularDAO cDAO = new CelularDAO();
+        else if (UTILS.isNewEntry(apanCelulares.getChildren()))
+        {
+            CelularNew celular = getDataTableObject();
 
-            celular = getDataTableObject();
-            cDAO.save(celular);
-
-            JOptionPane.showMessageDialog(null, "Celular Salvo com Sucesso!");
+            DAO.databaseUpdate(celular, ConstantsCelularSQL.SAVE);
+            if(DAO.getStatusCode())
+            {
+                JOptionPane.showMessageDialog(null, "Celular Salvo com Sucesso!");
+            }
         }
-        
-        // ATUALIZA O CELULAR SELECIONADO
-        else{
-            Celular celular = new Celular();
-            CelularDAO cDAO = new CelularDAO();
-
-            celular = getDataTableObject();
-            cDAO.update(celular);
-
-            JOptionPane.showMessageDialog(null, "Celular Alterado com Sucesso!");
+        else
+        {
+            CelularNew celular = getDataTableObject();
+            
+            DAO.databaseUpdate(celular, ConstantsCelularSQL.UPDATE);
+            if(DAO.getStatusCode())
+            {
+                JOptionPane.showMessageDialog(null, "Celular Alterado com Sucesso!");
+            }
         }
-        
-        limpaCampos(); // LIMPA OS FIELDS TXT
+
+        UTILS.clearTextFields(apanCelulares.getChildren());
         readTable();   // CARREGA DE NOVO A TABELA
     }
 
     @FXML
-    void tableCelularesMouseClicked(MouseEvent event) {
-        ObservableList<Celular> selectCelulares = tableCelulares.getSelectionModel().getSelectedItems();
+    protected void handleBtnApagar(ActionEvent event) {
+        if(UTILS.isNewEntry(apanCelulares.getChildren())) // VERIFICA SE Ha CLIENTE SELECIONADO
+        {
+            JOptionPane.showMessageDialog(null, "Nao ha Celular Selecionado!", "Erro!", 0);
+        }
         
-        for(Celular celular : selectCelulares) // RECUPERA OS DADOS DA TABELA NOS FIELDS
+        CelularNew celular = getDataTableObject();
+        
+        DAO.databaseUpdate(celular, ConstantsCelularSQL.DELETE);
+        
+        UTILS.clearTextFields(apanCelulares.getChildren());
+        readTable();
+        
+        if(DAO.getStatusCode())
+        {
+            JOptionPane.showMessageDialog(null, "O Celular foi apagado com sucesso!");
+        }
+    }
+
+    @FXML
+    protected void tableMouseClicked(MouseEvent event) {
+        ObservableList<CelularNew> selectCelulares = tableCelulares.getSelectionModel().getSelectedItems();
+        
+        for(CelularNew celular : selectCelulares) // RECUPERA OS DADOS DA TABELA NOS FIELDS
             setDataTableObject(celular);
     }
     
-    // inserindo as opções no cbPropriedade
-    private ObservableList<String> isPropriedade = FXCollections.observableArrayList("Sim", "Não");
+    // inserindo as opcoes no cbPropriedade
+    private ObservableList<String> isPropriedade = FXCollections.observableArrayList("Sim", "Nao");
         
 
     @FXML
@@ -234,32 +249,33 @@ public class FXMLCelularController {
         // insert no ComboBox Propriedade
         cbPropriedade.setItems(isPropriedade);
         
-        // inserindo as opções no cbCliente
-        searchClientes();
+        // inserindo as opcoes no cbCliente
+        searchCliente();
         
         readComboBox();       
         readTable();
+        UTILS.clearTextFields(apanCelulares.getChildren());
+        
     }
-
     
-    // initialize é como um FORM_POST_OPEN ou LOAD
-    // os métodos de ações estarão aqui pra baixo
+    // initialize e como um FORM_POST_OPEN ou LOAD
+    // os metodos de acoes estarao aqui pra baixo
     
     // CONSTRUTOR
     public FXMLCelularController(){
-        // NÃO PRECISA DO INIATIALIZE, JÁ É AUTOMATICO
+        // NaO PRECISA DO INIATIALIZE, Ja e AUTOMATICO
     }
     
     // INSERE OS DADOS DOS CAMPOS NO DAO E DEPOIS NA TABELA
-    public Celular getDataTableObject(){
-        Celular celular = new Celular();
+    public CelularNew getDataTableObject(){
+        CelularNew celular = new CelularNew();
         
-        celular.setModelo(txtModelo.getText());
-        celular.setMarca(txtMarca.getText());
-        celular.setAno(txtAno.getText());
-        celular.setSerial(txtSerial.getText());
-        celular.setEstadoUso(txtEstadoUso.getText());
-        celular.setIsPropriedade(cbPropriedade.getValue());
+        celular.setModel(txtModelo.getText());
+        celular.setManufacturer(txtMarca.getText());
+        celular.setYear(txtAno.getText());
+        celular.setSerialNum(txtSerial.getText());
+        celular.setUseState(txtEstadoUso.getText());
+        celular.setIsOurProperty(cbPropriedade.getValue());
         
         CelularUtils cDAO = new CelularUtils(); // CONVERTENDO O COMBO BOX CLIENTE PARA ID_CLIENTE
         celular.setIdCliente(cDAO.getClientIdByName(cbCliente.getValue()));
@@ -275,15 +291,15 @@ public class FXMLCelularController {
     }
     
     // INSERE OS DADOS DA TABELA/OBJETO PARA OS CAMPOS
-    public void setDataTableObject(Celular celular){
+    public void setDataTableObject(CelularNew celular){
         txtID.setText(Integer.toString(celular.getId()));
-        txtModelo.setText(celular.getModelo());
-        txtMarca.setText(celular.getMarca());
-        txtAno.setText(celular.getAno());
-        txtSerial.setText(celular.getSerial());
-        txtEstadoUso.setText(celular.getEstadoUso());
-        cbPropriedade.setValue(celular.getIsPropriedade());
-        cbPropriedade.setPromptText(celular.getIsPropriedade());
+        txtModelo.setText(celular.getModel());
+        txtMarca.setText(celular.getManufacturer());
+        txtAno.setText(celular.getYear());
+        txtSerial.setText(celular.getSerialNum());
+        txtEstadoUso.setText(celular.getUseState());
+        cbPropriedade.setValue(celular.getIsOurProperty());
+        cbPropriedade.setPromptText(celular.getIsOurProperty());
         
         CelularUtils cDAO = new CelularUtils(); // SETANDO O COMBO BOX CLIENTE
         cbCliente.setPromptText(cDAO.getClientNameById(celular.getIdCliente()));
@@ -295,20 +311,7 @@ public class FXMLCelularController {
         }
     }
     
-    public void limpaCampos(){
-        txtID.setText("");
-        txtModelo.setText("");
-        txtMarca.setText("");
-        txtAno.setText("");
-        txtSerial.setText("");
-        txtEstadoUso.setText("");
-        cbPropriedade.setPromptText("Nosso?");
-        cbPropriedade.setValue(null);
-        cbCliente.setPromptText("Proprietário");
-        cbCliente.setValue(null);
-    }
-    
-    public void searchClientes(){
+    public void searchCliente(){
         ClienteUtils cUtils = new ClienteUtils();
         ObservableList<Integer> idClienteOList = FXCollections.observableArrayList();
         for(Cliente cliente : cUtils.getIdClientes()){
@@ -323,7 +326,7 @@ public class FXMLCelularController {
         
         clientesOList.add("ASSISTÊNCIA"); // ADICIONANDO O NOME DA ASSISTÊNCIA NA LISTA
         
-        // BUSCA NO BANCO AS INFORMAÇÕES
+        // BUSCA NO BANCO AS INFORMAcoES
         for(Cliente cliente : cliDAO.listar()){
             
             clientesOList.add(cliente.getNome());
@@ -335,34 +338,39 @@ public class FXMLCelularController {
     
     public void readTable(){
         // Array para abrigar as tuplas da tabela
-        ObservableList<Celular> celularesOList = FXCollections.observableArrayList();
-        CelularDAO cDAO = new CelularDAO();
-        
-        // Busca no banco todas as informações
-        for(Celular celular : cDAO.listar()){
-            celularesOList.add(new Celular(
-                celular.getId(),
-                celular.getModelo(),
-                celular.getMarca(),
-                celular.getAno(),
-                celular.getSerial(),
-                celular.getEstadoUso(),
-                celular.getIsPropriedade(),
-                celular.getIdCliente()
-            ));
+        ObservableList<CelularNew> celularesOList = FXCollections.observableArrayList();
+        ObservableList<Object> objectList = FXCollections.observableArrayList();
+
+        DAO.databaseRead(objectList, ConstantsCelularSQL.LISTAR);
+
+        for(Object object : objectList){
+            HashMap<Integer, String> map = (HashMap<Integer,String>) object;
+            CelularNew celular = new CelularNew(
+                    UTILS.stringToInt(map.get(1)),
+                    map.get(2),
+                    map.get(3),
+                    map.get(4),
+                    map.get(5),
+                    map.get(6),
+                    map.get(7),
+                    UTILS.stringToInt(map.get(8))
+            );
+
+            celularesOList.add(celular);
         }
         
         // Determina qual coluna recebe qual valor do Modelo chamado
         tableColumnCelularId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        tableColumnCelularMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
-        tableColumnCelularModelo.setCellValueFactory(new PropertyValueFactory<>("modelo"));
-        tableColumnCelularAno.setCellValueFactory(new PropertyValueFactory<>("ano"));
-        tableColumnCelularSerial.setCellValueFactory(new PropertyValueFactory<>("serial"));
-        tableColumnCelularEstadoUso.setCellValueFactory(new PropertyValueFactory<>("estadoUso"));
-        tableColumnCelularPropriedade.setCellValueFactory(new PropertyValueFactory<>("isPropriedade"));
+        tableColumnCelularMarca.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
+        tableColumnCelularModelo.setCellValueFactory(new PropertyValueFactory<>("model"));
+        tableColumnCelularAno.setCellValueFactory(new PropertyValueFactory<>("year"));
+        tableColumnCelularSerial.setCellValueFactory(new PropertyValueFactory<>("serialNum"));
+        tableColumnCelularEstadoUso.setCellValueFactory(new PropertyValueFactory<>("useState"));
+        tableColumnCelularPropriedade.setCellValueFactory(new PropertyValueFactory<>("isOurProperty"));
         tableColumnCelularCliente.setCellValueFactory(new PropertyValueFactory<>("idCliente"));
         
         // Insere os dados na tabela
         tableCelulares.setItems(celularesOList);
     }
+    
 }
